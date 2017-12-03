@@ -1,0 +1,5 @@
+﻿  Assignment2.cpp
+c:\users\amin\downloads\assignment2\assignment2\assignment2.cpp(34): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\amin\downloads\assignment2\assignment2\assignment2.cpp(38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Assignment2.vcxproj -> C:\Users\amin\Downloads\Assignment2\Debug\Assignment2.exe
+  Assignment2.vcxproj -> C:\Users\amin\Downloads\Assignment2\Debug\Assignment2.pdb (Partial PDB)
