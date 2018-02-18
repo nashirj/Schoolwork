@@ -31,10 +31,10 @@ int main()
         factory = new CheesePizzaFactory();
     }
     
-    Pizza* pizza = factory->bake(); //bad access??
+    Pizza* pizza = factory->bake();
     pizza->listIngredients();
     delete pizza;
-    delete factory; //not sure what to do about destruction
+    delete factory;
     return 0;
 }
 

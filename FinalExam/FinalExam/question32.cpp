@@ -1,11 +1,10 @@
 //
 //  Nashir Janmohamed
 //  CS 52
-//  Final Exam - Question 31
+//  Final Exam - Question 32
 //
 
 #include <iostream>
-#include <string>
 using namespace std;
 
 /*
@@ -24,7 +23,7 @@ Input: 5
 XXXXX
   X
   X
- 
+
 Example 3
 Input: 6
    X
@@ -50,7 +49,7 @@ int main()
         return -1;
     }
     draw(user_in);
-    
+
     return 0;
 }
 
@@ -58,7 +57,7 @@ void draw(int x)
 {
     if (x%2 == 0)
         x++;
-    
+
     for (int i = 0; i < x; i++)
     {
         for (int j = 0; j < x; j++)
@@ -71,3 +70,4 @@ void draw(int x)
         cout << endl;
     }
 }
+

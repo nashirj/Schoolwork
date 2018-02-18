@@ -21,48 +21,37 @@
 using namespace std;
 
 class Ingredient {
+private:
     string _description;
 public:
     Ingredient(string description){
         setDescription(description);
     }
     void setDescription(string description){this->_description = description;}
-    string getDescription(){return _description;}
+    string getDescription(){return this->_description;} //thread 1 signal SIGABRT
 };
 
-class TomatoSauce : public Ingredient
-{
-    string _description;
+class TomatoSauce : public Ingredient{
 public:
     TomatoSauce(string description) : Ingredient(description){}
 };
 
 
-class Cheese : public Ingredient
-{
-    string _description;
+class Cheese : public Ingredient{
 public:
     Cheese(string description) : Ingredient(description){}
 };
 
 
-class Dough : public Ingredient
-{
-    string _description;
+class Dough : public Ingredient{
 public:
-    Dough(string description) : Ingredient(description)
-    {
-        //intentionally blank
-    }
+    Dough(string description) : Ingredient(description){}
 };
 
 
-class Pepperoni : public Ingredient
-{
-    string _description;
+class Pepperoni : public Ingredient{
 public:
     Pepperoni(string description) : Ingredient(description){}
-    string getDescription(){return _description;}
 };
 
 
@@ -77,8 +66,8 @@ public:
  adds an ingredient to the pizza and a function to print its ingredients to the console.
  */
 
-class Pizza
-{
+class Pizza{
+private:
     int _ingredientCount, _MAX;
     Ingredient** ingredientPtr;
 public:
@@ -98,16 +87,15 @@ public:
     
      //Adds ingredients to pizza
     void addIngredient(Ingredient *ingredient){
-        ingredientPtr[_ingredientCount] = ingredient; //something goes wrong here??
+        ingredientPtr[_ingredientCount] = ingredient;
         _ingredientCount++;
     }
     
     //prints contents of pizza to console
     void listIngredients(){
         cout << "Pizza with:" << endl;
-        for (int i = 0; i < _ingredientCount; i++)
-        {
-            cout << this->ingredientPtr[i]->getDescription() << endl;
+        for (int i = 0; i < _ingredientCount; i++){
+            cout << this->ingredientPtr[i]->getDescription() << endl; //double pointer, have to dereference twice
         }
     }
 };
@@ -122,77 +110,52 @@ public:
  ingredients including pepperoni to it.
  */
 
-class PizzaFactory
-{
+class PizzaFactory{
 public:
-    //PizzaFactory();
-    virtual ~PizzaFactory()
-    {
-        //intentionally blank
+    virtual ~PizzaFactory(){
+        //need to have some definition for destructor to work
     }
     virtual Pizza* bake() = 0;
 };
 
 
 
-class CheesePizzaFactory : public PizzaFactory
-{
-    Pizza *CheesePizzaPtr;
+class CheesePizzaFactory : public PizzaFactory{
 public:
-    CheesePizzaFactory()
-    {
-        Pizza CheesePizza(10);
-        CheesePizzaPtr = &CheesePizza;
-    }
     ~CheesePizzaFactory(){
-        
+        //need to have some definition for destructor to work
     }
-    virtual Pizza* bake() override
-    {
-        //these instantiations don't work
-        TomatoSauce sauce("chunky tomato glaze");
-        CheesePizzaPtr->addIngredient(&sauce);
-        /*TomatoSauce sauce1("chunky  glaze");
-        CheesePizzaPtr->addIngredient(&sauce1);
-        TomatoSauce sauce2("chunky tomato ");
-        CheesePizzaPtr->addIngredient(&sauce2);
-        CheesePizzaPtr->listIngredients();
-        Cheese cheese("mozarella cheese");
-        CheesePizzaPtr->addIngredient(&cheese);
-        CheesePizzaPtr->listIngredients();
-        Dough crust("Cheesy crust");
-        CheesePizzaPtr->addIngredient(&crust);
-        Dough dough("garlicky dough");
-        CheesePizzaPtr->addIngredient(&dough);*/
-        return CheesePizzaPtr;
+    virtual Pizza* bake() override{
+        Pizza* pizza = new Pizza(3);
+        TomatoSauce* sauce = new TomatoSauce("Chunky Tomato Sauce");
+        pizza->addIngredient(sauce);
+        Cheese* cheese = new Cheese("Jalapeño Pepper Cheddar Cheese");
+        pizza->addIngredient(cheese);
+        Dough* dough = new Dough("Garlicky Dough");
+        pizza->addIngredient(dough);
+        //pizza->listIngredients(); //works fine when called from here, but not from main
+        return pizza;
     }
 };
 
 
-class PepperoniPizzaFactory : public PizzaFactory
-{
-    Pizza *PepperoniPizzaPtr;
+class PepperoniPizzaFactory : public PizzaFactory{
 public:
-    PepperoniPizzaFactory()
-    {
-        Pizza PepperoniPizza(4);
-        PepperoniPizzaPtr = &PepperoniPizza;
-    }
     ~PepperoniPizzaFactory(){
-        
+        //need to have some definition for destructor to work
     }
-    virtual Pizza* bake() override
-    {
-        //these instantiations don't work
-        TomatoSauce sauce("Chunky Tomato Sauce");
-        PepperoniPizzaPtr->addIngredient(&sauce);
-        Cheese cheese("Jalapeño Pepper Cheddar Cheese");
-        PepperoniPizzaPtr->addIngredient(&cheese);
-        Dough dough("Garlicky Dough");
-        PepperoniPizzaPtr->addIngredient(&dough);
-        Pepperoni pepperoni("Spicy Pepperoni");
-        PepperoniPizzaPtr->addIngredient(&pepperoni);
-        return PepperoniPizzaPtr;
+    virtual Pizza* bake() override{
+        Pizza* pizza = new Pizza(4);
+        TomatoSauce* sauce = new TomatoSauce("Chunky Tomato Sauce");
+        pizza->addIngredient(sauce);
+        Cheese* cheese = new Cheese("Jalapeño Pepper Cheddar Cheese");
+        pizza->addIngredient(cheese);
+        Dough* dough = new Dough("Garlicky Dough");
+        pizza->addIngredient(dough);
+        Pepperoni* pepperoni = new Pepperoni("Spicy Pepperoni");
+        pizza->addIngredient(pepperoni);
+        //pizza->listIngredients(); //works fine when called from here, but not from main
+        return pizza;
     }
 };
 
