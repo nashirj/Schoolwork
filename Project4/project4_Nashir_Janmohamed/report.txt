@@ -1,0 +1,145 @@
+I have tested this program and it has no errors.
+
+OUTPUT
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: empty 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+1
+Enter the 5 digit ID number of the user logging in:
+12345
+Enter the lab number the user is logging in from (1-4):
+2
+Enter computer station number the user is logging in to (1-6):
+44
+Invalid input, choose from (1-6):
+4
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12345 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+1
+Enter the 5 digit ID number of the user logging in:
+12345
+That user is already logged in...
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12345 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+3
+Enter the 5 digit ID number of the user to find:
+12345
+Lab #2, Station #4
+
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12345 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+3
+Enter the 5 digit ID number of the user to find:
+1234
+None
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12345 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+2
+Enter the 5 digit ID number of the user to find:
+1234
+That user could not be found
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12345 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+1
+Enter the 5 digit ID number of the user logging in:
+12543
+Enter the lab number the user is logging in from (1-4):
+2
+Enter computer station number the user is logging in to (1-6):
+4
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: 12543 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+2
+Enter the 5 digit ID number of the user to find:
+12543
+User 12543 is logged off
+
+LAB STATUS
+Lab # Computer Stations
+1 1: empty 2: empty 3: empty 4: empty 5: empty 
+2 1: empty 2: empty 3: empty 4: empty 5: empty 6: empty 
+3 1: empty 2: empty 3: empty 4: empty 
+4 1: empty 2: empty 3: empty 
+
+MAIN MENU
+0) Quit
+1) Simulate login
+2) Simulate logoff
+3) Search
+0
+Goodbye!

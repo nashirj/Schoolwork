@@ -1,0 +1,63 @@
+I have tested this program and it has no errors.
+
+//RUN 1
+Welcome to Rock/Paper/Scissors simulator!
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose paper
+[paper wraps rock] => the computer won...
+Play again? [yes/no]: yes
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose paper
+[paper wraps rock] => the computer won...
+Play again? [yes/no]: yes
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose rock
+you both chose rock => it's a draw...
+Play again? [yes/no]: yes
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose rock
+you both chose rock => it's a draw...
+Play again? [yes/no]: yes
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose scissors
+[rock smashes scissors] => you won!
+Play again? [yes/no]: yes
+Please choose [rock/paper/scissors]: rock
+You chose rock and the computer chose scissors
+[rock smashes scissors] => you won!
+Play again? [yes/no]: no
+Thanks for playing!
+
+
+//RUN 2
+Welcome to Rock/Paper/Scissors simulator!
+Please choose [rock/paper/scissors]: scissors
+You chose scissors and the computer chose scissors
+you both chose scissors => it's a draw...
+Play again? [yes/no]: nooo
+please pick from [yes/no]: wrou
+please pick from [yes/no]: arklhqwrlihqet
+please pick from [yes/no]: alDR
+please pick from [yes/no]: NO
+Thanks for playing!
+
+
+//RUN 3
+Welcome to Rock/Paper/Scissors simulator!
+Please choose [rock/paper/scissors]: arlhiqwr
+Please pick one of [rock/paper/scissors]: as
+Please pick one of [rock/paper/scissors]:  
+Please pick one of [rock/paper/scissors]: wqoruqwr
+Please pick one of [rock/paper/scissors]: scissors
+You chose scissors and the computer chose scissors
+you both chose scissors => it's a draw...
+Play again? [yes/no]: yEs
+Please choose [rock/paper/scissors]: RoCK
+You chose RoCK and the computer chose paper
+[paper wraps rock] => the computer won...
+Play again? [yes/no]: YEs
+Please choose [rock/paper/scissors]: PapER
+You chose PapER and the computer chose scissors
+[scissors cut paper ] => the computer won...
+Play again? [yes/no]: nO
+Thanks for playing!

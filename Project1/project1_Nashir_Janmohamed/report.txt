@@ -1,0 +1,68 @@
+I have tested this program and it has no issues.
+
+RUN 1\
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 4 5
+Please enter one of the operations +, -, * or / and press Enter: +
+4 + 5 = 9
+Play again [Y/N]?: y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 3 2409.124
+Please enter one of the operations +, -, * or / and press Enter: *
+3 * 2409.124 = 7227.372
+Play again [Y/N]?: y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 4 1208
+Please enter one of the operations +, -, * or / and press Enter: n
+I can compute really well, but what you entered is not one of the operations I know...
+Play again [Y/N]?: y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: j
+Exception in thread "main" java.util.InputMismatchException
+ 	at java.base/java.util.Scanner.throwFor Scanner.java:860
+ 	at java.base/java.util.Scanner.next Scanner.java:1497
+ 	at java.base/java.util.Scanner.nextFloat Scanner.java:2399
+ 	at Calculator.main
+
+RUN 2
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 4 5
+Please enter one of the operations +, -, * or / and press Enter: j
+I can compute really well, but what you entered is not one of the operations I know...
+Play again [Y/N]?: j
+Sorry, I don't understand...
+Play again [Y/N]?: e
+Sorry, I don't understand...
+Play again [Y/N]?: qo
+Sorry, I don't understand...
+Play again [Y/N]?: fh
+Sorry, I don't understand...
+Play again [Y/N]?: j
+Sorry, I don't understand...
+Play again [Y/N]?: !
+Sorry, I don't understand...
+Play again [Y/N]?: .
+Sorry, I don't understand...
+Play again [Y/N]?: y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 4 2084
+Please enter one of the operations +, -, * or / and press Enter: _
+I can compute really well, but what you entered is not one of the operations I know...
+Play again [Y/N]?: y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 2 1048
+Please enter one of the operations +, -, * or / and press Enter: /
+2 / 1048 = 0.001908397
+Play again [Y/N]?: j
+Sorry, I don't understand...
+Play again [Y/N]?: e
+Sorry, I don't understand...
+Play again [Y/N]?: wrouqwr
+Sorry, I don't understand...
+Play again [Y/N]?: Y
+Hi, I am really good at math! Put me to the test.
+Please enter two numbers and then press Enter: 2 0
+Please enter one of the operations +, -, * or / and press Enter: /
+2 / 0 = Infinity
+Play again [Y/N]?: N
+Bye bye!

@@ -1,0 +1,236 @@
+I have tested this program and there are no errors.
+
+
+
+
+//sample run
+Welcome to BDC; we sell books, movies, CDs, and other miscellaneous items!
+Thanks for shopping with us today!
+Please enter your first name: Nashir
+Please enter your last name: Janmohamed
+Please enter your 5-digit store ID: 12345
+
+Welcome Nashir Janmohamed!
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+1
+What items are you interested in today?
+For books, enter [1]
+For CDs, enter [2]
+For Movies, enter [3]
+For other items, enter [4]
+To see all of our items, enter [5]
+5
+
+Item #1:
+Title: Telescope
+Description: high-powered refractor telescope great for stargazing!
+Price: $79.99
+ID: bec80baf
+Type: 'Item'
+Item #2:
+Title: Kind of Blue
+Description: A studio album by American jazz trumpeter Miles Davis. It is regarded by many critics as jazz's greatest record, Davis's
+             masterpiece, and one of the best albums of all time.
+Track Count: 5
+Price: $15.95
+ID: 5837e9ef
+Type: 'CD'
+Item #3:
+Title: Cracking the Coding Interview
+Description: Cracking the Coding Interview, 6th Edition is designed to help prospective software engineers through the process of
+             preparing for the job hunt, teaching them what they need to know and enabling optimal performance during the interview.
+Page Count: 696
+Price: $34.89
+ID: c1307b0b
+Type: 'Book'
+Item #4:
+Title: Harry Potter and the Sorcerer's Stone
+Description: The story of Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful
+             wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to
+             become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become
+             his closest allies and help him discover the truth about his parents' mysterious deaths.
+Page Count: 223
+Price: $8.99
+ID: f2ce8999
+Type: 'Book'
+Item #5:
+Title: Little Fires Everywhere
+Description: Mia starts as Mrs. Richardon's tenant, then becomes her housekeeper, then a mentor and secret keeper for her
+             children; Pearl falls into a love triangle with the two Richardson boys. Like Shaker Heights, "Little Fires
+             Everywhere" is meticulously planned, every storyline and detail placed with obvious purpose.
+Page Count: 352
+Price: $13.99
+ID: de170ad3
+Type: 'Book'
+Item #6:
+Title: Zootopia
+Description: From the largest elephant to the smallest shrew, the city of Zootopia is a mammal metropolis where
+             various animals live and thrive. When Judy Hopps (Ginnifer Goodwin) becomes the first rabbit to join the
+             police force, she quickly learns how tough it is to enforce the law. Determined to prove herself, Judy
+             jumps at the opportunity to solve a mysterious case. Unfortunately, that means working with Nick Wilde
+             (Jason Bateman), a wily fox who makes her job even harder.
+Length: 110
+Price: $15.97
+ID: bec1ede4
+Type: 'Movie'
+Item #7:
+Title: Black Panther
+Description: After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place
+             as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets
+             tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with
+             treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat
+             his foes and secure the safety of his people.
+Length: 135
+Price: $24.99
+ID: a008a731
+Type: 'Movie'
+Item #8:
+Title: Star Wars: Episode VIII: The Last Jedi
+Description: Luke Skywalker's peaceful and solitary existence gets upended when he encounters Rey, a young woman who shows strong
+             signs of the Force. Her desire to learn the ways of the Jedi forces Luke to make a decision that changes their
+             lives forever. Meanwhile, Kylo Ren and General Hux lead the First Order in an all-out assault against Leia and
+             the Resistance for supremacy of the galaxy.
+Length: 152
+Price: $19.99
+ID: 294ea435
+Type: 'Movie'
+Item #9:
+Title: The Karate Kid
+Description: Daniel (Ralph Macchio) moves to Southern California with his mother, Lucille (Randee Heller), but quickly finds himself
+             the target of a group of bullies who study karate at the Cobra Kai dojo. Fortunately, Daniel befriends Mr. Miyagi
+             (Noriyuki "Pat" Morita), an unassuming repairman who just happens to be a martial arts master himself. Miyagi takes             Daniel under his wing, training him in a more compassionate form of karate and preparing him to compete against the
+             brutal Cobra Kai.
+Length: 127
+Price: $7.88
+ID: 4e52a8e1
+Type: 'Movie'
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+2
+Input the item ID: 
+4e52a8e1
+The Karate Kid was added to the cart successfully!
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+2
+Input the item ID: 
+bec1ede4
+Zootopia was added to the cart successfully!
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+2
+Input the item ID: 
+a008a731
+Black Panther was added to the cart successfully!
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+3
+There are 3 items in Nashir Janmohamed's (12345) cart
+Item 1
+Type: Movie
+Title: The Karate Kid
+Description: Daniel (Ralph Macchio) moves to Southern California with his mother, Lucille (Randee Heller), but quickly finds himself
+             the target of a group of bullies who study karate at the Cobra Kai dojo. Fortunately, Daniel befriends Mr. Miyagi
+             (Noriyuki "Pat" Morita), an unassuming repairman who just happens to be a martial arts master himself. Miyagi takes             Daniel under his wing, training him in a more compassionate form of karate and preparing him to compete against the
+             brutal Cobra Kai.
+Length: 127
+Price: $7.88
+ID: 4e52a8e1
+Item 2
+Type: Movie
+Title: Zootopia
+Description: From the largest elephant to the smallest shrew, the city of Zootopia is a mammal metropolis where
+             various animals live and thrive. When Judy Hopps (Ginnifer Goodwin) becomes the first rabbit to join the
+             police force, she quickly learns how tough it is to enforce the law. Determined to prove herself, Judy
+             jumps at the opportunity to solve a mysterious case. Unfortunately, that means working with Nick Wilde
+             (Jason Bateman), a wily fox who makes her job even harder.
+Length: 110
+Price: $15.97
+ID: bec1ede4
+Item 3
+Type: Movie
+Title: Black Panther
+Description: After the death of his father, T'Challa returns home to the African nation of Wakanda to take his rightful place
+             as king. When a powerful enemy suddenly reappears, T'Challa's mettle as king -- and as Black Panther -- gets
+             tested when he's drawn into a conflict that puts the fate of Wakanda and the entire world at risk. Faced with
+             treachery and danger, the young king must rally his allies and release the full power of Black Panther to defeat
+             his foes and secure the safety of his people.
+Length: 135
+Price: $24.99
+ID: a008a731
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+4
+The subtotal of the cart is $48.84
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+6
+Enter the ID of the item you'd like to remove: 
+bec80baf
+That item is not in your cart...
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+6
+Enter the ID of the item you'd like to remove: 
+a008a731
+Black Panther was removed from your cart succesfully!
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+4
+The subtotal of the cart is $23.85
+1) List items available in store
+2) Purchase item
+3) Print items in cart
+4) Show Balance
+5) Checkout
+6) Remove item from cart
+7) Quit
+5
+$23.85 was charged to your bank account successfully.
+Thanks for shopping at BDC!Goodbye!

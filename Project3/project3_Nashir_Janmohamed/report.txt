@@ -1,0 +1,168 @@
+I have tested these programs and they have no errors. (1) WordCount (2) Cipher
+
+WORDCOUNT
+//RUN 1
+//input:      joe.    hi
+2 words
+1 e
+1 h
+1 i
+1 j
+1 o
+
+//RUN 2
+//input:      joe.    hi asflhqw q;wlr ///afr13r 
+invalid token: ';'
+invalid token: '/'
+invalid token: '/'
+invalid token: '/'
+invalid token: '1'
+invalid token: '3'
+5 words
+2 a
+1 e
+2 f
+2 h
+1 i
+1 j
+2 l
+1 o
+2 q
+3 r
+1 s
+2 w
+
+//RUN 3
+//input:
+no input... Number of words = 0
+
+//RUN 4
+//input: hiIamNashirand,this,is.....kindof.. weird.        yup
+6 words
+3 a
+3 d
+1 e
+1 f
+3 h
+7 i
+1 k
+1 m
+3 n
+1 o
+1 p
+2 r
+3 s
+1 t
+1 u
+1 w
+1 y
+
+
+
+
+
+
+
+
+CIPHER
+//OUTPUT
+Iteration #1: 9llY[cwYlw\Yofx
+Iteration #2: 8kkXZbvXkv[Xnew
+Iteration #3: 7jjWYauWjuZWmdv
+Iteration #4: 6iiVX`tVitYVlcu
+Iteration #5: 5hhUW_sUhsXUkbt
+Iteration #6: 4ggTV^rTgrWTjas
+Iteration #7: 3ffSU]qSfqVSi`r
+Iteration #8: 2eeRT\pRepURh_q
+Iteration #9: 1ddQS[oQdoTQg^p
+Iteration #10: 0ccPRZnPcnSPf]o
+Iteration #11: /bbOQYmObmROe\n
+Iteration #12: .aaNPXlNalQNd[m
+Iteration #13: -``MOWkM`kPMcZl
+Iteration #14: ,__LNVjL_jOLbYk
+Iteration #15: +^^KMUiK^iNKaXj
+Iteration #16: *]]JLThJ]hMJ`Wi
+Iteration #17: )\\IKSgI\gLI_Vh
+Iteration #18: ([[HJRfH[fKH^Ug
+Iteration #19: 'ZZGIQeGZeJG]Tf
+Iteration #20: &YYFHPdFYdIF\Se
+Iteration #21: %XXEGOcEXcHE[Rd
+Iteration #22: $WWDFNbDWbGDZQc
+Iteration #23: #VVCEMaCVaFCYPb
+Iteration #24: "UUBDL`BU`EBXOa
+Iteration #25: !TTACK_AT_DAWN`
+Iteration #26:  SS@BJ^@S^C@VM_
+Iteration #27: ~RR?AI]?R]B?UL^
+Iteration #28: }QQ>@H\>Q\A>TK]
+Iteration #29: |PP=?G[=P[@=SJ\
+Iteration #30: {OO<>FZ<OZ?<RI[
+Iteration #31: zNN;=EY;NY>;QHZ
+Iteration #32: yMM:<DX:MX=:PGY
+Iteration #33: xLL9;CW9LW<9OFX
+Iteration #34: wKK8:BV8KV;8NEW
+Iteration #35: vJJ79AU7JU:7MDV
+Iteration #36: uII68@T6IT96LCU
+Iteration #37: tHH57?S5HS85KBT
+Iteration #38: sGG46>R4GR74JAS
+Iteration #39: rFF35=Q3FQ63I@R
+Iteration #40: qEE24<P2EP52H?Q
+Iteration #41: pDD13;O1DO41G>P
+Iteration #42: oCC02:N0CN30F=O
+Iteration #43: nBB/19M/BM2/E<N
+Iteration #44: mAA.08L.AL1.D;M
+Iteration #45: l@@-/7K-@K0-C:L
+Iteration #46: k??,.6J,?J/,B9K
+Iteration #47: j>>+-5I+>I.+A8J
+Iteration #48: i==*,4H*=H-*@7I
+Iteration #49: h<<)+3G)<G,)?6H
+Iteration #50: g;;(*2F(;F+(>5G
+Iteration #51: f::')1E':E*'=4F
+Iteration #52: e99&(0D&9D)&<3E
+Iteration #53: d88%'/C%8C(%;2D
+Iteration #54: c77$&.B$7B'$:1C
+Iteration #55: b66#%-A#6A&#90B
+Iteration #56: a55"$,@"5@%"8/A
+Iteration #57: `44!#+?!4?$!7.@
+Iteration #58: _33 "*> 3># 6-?
+Iteration #59: ^22~!)=~2="~5,>
+Iteration #60: ]11} (<}1<!}4+=
+Iteration #61: \00|~';|0; |3*<
+Iteration #62: [//{}&:{/:~{2);
+Iteration #63: Z..z|%9z.9}z1(:
+Iteration #64: Y--y{$8y-8|y0'9
+Iteration #65: X,,xz#7x,7{x/&8
+Iteration #66: W++wy"6w+6zw.%7
+Iteration #67: V**vx!5v*5yv-$6
+Iteration #68: U))uw 4u)4xu,#5
+Iteration #69: T((tv~3t(3wt+"4
+Iteration #70: S''su}2s'2vs*!3
+Iteration #71: R&&rt|1r&1ur) 2
+Iteration #72: Q%%qs{0q%0tq(~1
+Iteration #73: P$$prz/p$/sp'}0
+Iteration #74: O##oqy.o#.ro&|/
+Iteration #75: N""npx-n"-qn%{.
+Iteration #76: M!!mow,m!,pm$z-
+Iteration #77: L  lnv+l +ol#y,
+Iteration #78: K~~kmu*k~*nk"x+
+Iteration #79: J}}jlt)j})mj!w*
+Iteration #80: I||iks(i|(li v)
+Iteration #81: H{{hjr'h{'kh~u(
+Iteration #82: Gzzgiq&gz&jg}t'
+Iteration #83: Fyyfhp%fy%if|s&
+Iteration #84: Exxego$ex$he{r%
+Iteration #85: Dwwdfn#dw#gdzq$
+Iteration #86: Cvvcem"cv"fcyp#
+Iteration #87: Buubdl!bu!ebxo"
+Iteration #88: Attack at dawn!
+Iteration #89: @ss`bj~`s~c`vm 
+Iteration #90: ?rr_ai}_r}b_ul~
+Iteration #91: >qq^`h|^q|a^tk}
+Iteration #92: =pp]_g{]p{`]sj|
+Iteration #93: <oo\^fz\oz_\ri{
+Iteration #94: ;nn[]ey[ny^[qhz
+Iteration #95: :mmZ\dxZmx]Zpgy
+Iteration #96: 9llY[cwYlw\Yofx
+Iteration #97: 8kkXZbvXkv[Xnew
+Iteration #98: 7jjWYauWjuZWmdv
+Iteration #99: 6iiVX`tVitYVlcu
+Iteration #100: 5hhUW_sUhsXUkbt
