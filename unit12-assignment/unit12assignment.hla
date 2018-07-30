@@ -1,0 +1,99 @@
+program unit12HW;
+#include ("stdlib.hhf")
+static
+radius : real32 := 0;
+base : real32 := 0;
+height : real32 := 0;
+pi : real80 := 3.14159;
+vPyramid : real80 := 0;
+vCone : real80 := 0;
+vCylinder : real80 := 0;
+
+procedure volumeFinder( r: real32; b : real32; h : real32 ); @nodisplay; @noframe; 
+static
+iReturnAddress : dword;
+denominator : real64 := 3.0;
+rTemp : real32;
+
+begin volumeFinder;
+// entry sequence
+// preserve registers --- none used in main
+// acquire parameters on the stack
+// not using any integer registers, so can leave stack alone
+//obtain parameters - reverse order from how they were pushed, FIFO
+fstp( h );
+fstp( b );
+fstp( r );
+// push back the return address - not necessary, stack not altered
+// preserve registers --- n/a
+
+finit(); //initializes fpu ST for operations
+
+//Volume Pyramid: 1 / 3 * b * h
+fld(b);
+fld(h);
+fmulp(); //res = b*h
+fdiv(denominator);
+
+//Volume Cone: 1/ 3 * pi * r * r * h
+fld(r);
+fld(r);
+fld(h);
+fld(pi);
+fmulp(); //res = pi * h
+fmulp(); //res1 = res * r
+fmulp(); //res2 == res1 * r
+fdiv(denominator);
+
+//Volume Cylinder = pi * r * r * h
+//could fst value of previous combination then multiply by 3
+/*
+fst(rTemp);
+fld(rTemp);
+fld(denominator);
+fmulp();
+*/
+fld(r);
+fld(r);
+fld(h);
+fld(pi);
+fmulp(); //res = pi * h
+fmulp(); //res1 = res * r
+fmulp(); //res2 == res1 * r
+//vCylinder is on top of fpu stack
+
+// pop all preserved registers --- none
+ret();
+end volumeFinder;
+
+begin unit12HW;
+stdout.put("Lemme calculate the volumes of various things!", nl);
+stdout.put("Gimme r: ");
+stdin.get(radius);
+stdout.put("Gimme b: ");
+stdin.get(base);
+stdout.put("Gimme h: ");
+stdin.get(height);
+
+fld(radius);
+fld(base);
+fld(height);
+
+call volumeFinder;
+//assign result of computations to local variables
+fstp(vCylinder);
+fstp(vCone);
+fstp(vPyramid);
+
+stdout.put("Volume of a pyramid = ");
+//stdout.putr80( r:real80; width:uns32; decpts:uns32; fillchar:char );
+stdout.putr80( vPyramid, 10, 5, ' ' );
+stdout.newln();
+stdout.put("Volume of a cone = ");
+stdout.putr80( vCone, 10, 5, ' ' );
+stdout.newln();
+stdout.put("Volume of a cylinder = ");
+stdout.putr80( vCylinder, 10, 5, ' ' );
+stdout.newln();
+
+end unit12HW;

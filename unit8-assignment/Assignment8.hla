@@ -1,0 +1,57 @@
+program Assignment8;
+#include ("stdlib.hhf");
+static
+user_in: int8;
+to_print: int8;
+
+
+begin Assignment8;
+
+
+stdout.put("Gimme a decimal value to use as n: ");
+stdin.get(user_in);
+
+
+mov(user_in, BL);
+add(1, BL);
+
+
+//HIGH-LEVEL EQUIVALENT
+//for (int i = 1; i <= n; i++){
+//	for (int j = 1; j <= n; j++)
+//		cout << i;
+//	cout << endl;
+//}
+
+
+
+//outer loop
+OuterForLp:
+InitializeOuterForLp: // to_print = 1
+mov( 1, to_print );
+OuterForLpTerminationTest: // is to_print >= BL? then terminate for
+cmp( to_print, BL );
+jnl OuterForLpDone; 
+OuterForLpBody:
+
+//inner loop
+InnerForLp:
+InitializeInnerForLp: // BH = 1
+mov( 1, BH );
+InnerForLpTerminationTest: // is BH >= BL? then terminate for
+cmp( BH, BL );
+jnl InnerForLpDone;
+InnerForLpBody:
+stdout.put(to_print);
+InnerForLpIncrement:
+inc( BH ); 
+jmp InnerForLpTerminationTest;
+InnerForLpDone:
+
+stdout.newln();
+OuterForLpIncrement:
+inc( to_print ); 
+jmp OuterForLpTerminationTest;
+OuterForLpDone:
+
+end Assignment8;

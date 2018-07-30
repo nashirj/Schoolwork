@@ -1,0 +1,96 @@
+program Assignment7;
+
+
+#include ("stdlib.hhf");
+static
+user_in: int8;
+
+
+begin Assignment7;
+
+
+stdout.put("Gimme a decimal value to print: ");
+stdin.get(user_in);
+stdout.put(user_in, " is ");
+
+
+mov(user_in, BL);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+stdout.put("_");
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+
+
+rol( 1, BL ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+stdout.newln();
+
+
+end Assignment7;

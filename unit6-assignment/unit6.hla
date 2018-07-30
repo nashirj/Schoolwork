@@ -1,0 +1,9 @@
+program Unit6;
+#include( "stdlib.hhf" );
+begin Unit6;
+stdout.put( "H  H  U   U SSSS K  K Y   Y !!", nl );
+stdout.put( "H  H  U   U S    K K   Y Y  !!", nl );
+stdout.put( "HHHH  U   U SSSS KK     Y   !!", nl );
+stdout.put( "H  H  U   U    S K K    Y   !!", nl );
+stdout.put( "H  H   UUU  SSSS K  K   Y   !!", nl );
+end Unit6;

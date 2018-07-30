@@ -1,0 +1,102 @@
+/*
+   Create an HLA Assembly language program that prompts for a single decimal values from the user and prints a repetitive pattern like the one shown below.
+
+Here are some example program dialogues to guide your efforts:
+
+Feed Me: 6
+122333444455555666666555554444333221
+
+Feed Me: 3
+122333221
+
+In an effort to help you focus on building an Assembly program, I’d like to offer you the following C statements matches the program specifications stated above. If you like, use them as the basis for building your Assembly program.
+
+SAMPLE C CODE:
+------------------------
+int x, y, i, j;
+printf( "Feed Me:" );
+scanf( "%d", &x );
+for (int i = 1; i <= x; i++) {
+
+for (j = 1; j <= i; j++){
+printf( "%d", i );
+}
+}
+
+for (int i = x-1; i >= 1; i--) {
+
+for (j = 1; j <= i; j++){
+printf( "%d", i );
+}
+}
+printf( "\n" );
+*/
+
+program question22;
+#include ("stdlib.hhf");
+static
+user_in: int8;
+to_print: int8:= 1;
+
+begin question22;
+
+stdout.put("Feed me: ");
+stdin.get(user_in);
+
+mov(user_in, BL);
+
+//LOOP 1
+//outer loop
+OuterForLpTerminationTest: 
+cmp( to_print, BL ); //BL = user_in
+jg OuterForLpDone;
+OuterForLpBody:
+
+//inner loop
+InitializeInnerForLp: // BH = 1
+mov( 1, BH );
+InnerForLpTerminationTest: 
+cmp( BH, to_print );
+jg InnerForLpDone;
+InnerForLpBody:
+stdout.put(to_print);
+InnerForLpIncrement:
+inc( BH );
+jmp InnerForLpTerminationTest;
+InnerForLpDone:
+
+OuterForLpIncrement:
+inc( to_print );
+jmp OuterForLpTerminationTest;
+OuterForLpDone:
+
+
+
+//LOOP 2 
+sub(2, to_print);
+OuterTerminationTest: 
+cmp( to_print, 0 );
+jle OuterDone;
+OuterBody:
+
+//inner loop
+InitializeInner:
+mov(to_print, CH);
+InnerTerminationTest: 
+cmp(CH, 0 );
+jle InnerDone;
+InnerBody:
+stdout.put(to_print);
+InnerIncrement:
+dec( CH );
+jmp InnerTerminationTest;
+InnerDone:
+
+OuterIncrement:
+dec( to_print );
+jmp OuterTerminationTest;
+OuterDone:
+
+stdout.newln();
+
+end question22;

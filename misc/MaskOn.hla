@@ -1,0 +1,83 @@
+program Mask;
+#include ("stdlib.hhf");
+static
+MaskOn: int8 := 0;
+MaskOff: int8 := 0;
+
+begin Mask;
+
+mov(85, BH);
+
+//loop prints decimal in binary
+stdout.put("%")
+ForLp:
+InitializeForLp: // BH = 1
+mov( 0, BL );
+ForLpTerminationTest: // is BL >= 8? then terminate for
+cmp( BL, 8 );
+jnl ForLpDone;
+ForLpBody:
+rol( 1, BH ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+ForLpIncrement:
+inc( BL );
+jmp ForLpTerminationTest;
+ForLpDone:
+stdout.newln();
+
+stdout.put("Mask on", nl);
+or(%1111_1111, BH);
+
+//loop prints decimal in binary
+stdout.put("%")
+SecondForLp:
+InitializeSecondForLp: // BH = 1
+mov( 0, BL );
+SecondForLpTerminationTest: // is BL >= 8? then terminate for
+cmp( BL, 8 );
+jnl SecondForLpDone;
+SecondForLpBody:
+rol( 1, BH ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+SecondForLpIncrement:
+inc( BL );
+jmp SecondForLpTerminationTest;
+SecondForLpDone:
+stdout.newln();
+
+stdout.put("___ it, mask off", nl);
+and(%0000_0000, BH);
+
+//loop prints decimal in binary
+stdout.put("%")
+ThirdForLp:
+InitializeThirdForLp: // BH = 1
+mov( 0, BL );
+ThirdForLpTerminationTest: // is BL >= 8? then terminate for
+cmp( BL, 8 );
+jnl ThirdForLpDone;
+ThirdForLpBody:
+rol( 1, BH ); 
+// put lower eight EFLAG bits into register AH
+lahf();
+// mask out all bits in AH but bit position zero
+and( %0000_0001, AH );
+mov( AH, DH );
+stdout.puti8(DH);
+ThirdForLpIncrement:
+inc( BL );
+jmp ThirdForLpTerminationTest;
+ThirdForLpDone:
+stdout.newln();
+
+end Mask;
