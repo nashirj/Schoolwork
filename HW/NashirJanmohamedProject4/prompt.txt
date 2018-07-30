@@ -1,0 +1,18 @@
+In this project, you will develop a simple spell checker program that spots misspelled words in a file by checking each word in the file against a provided reference dictionary.
+
+A list of correctly spelled English words is provided as a reference (ref.txt). There is one word per line in this file. The user file to be checked is a text file where each space-separated word of the file is to be examined.  Punctuations, case, and numbers should be ignored. If a word from the file does not exist in the provided list then it is assumed to be misspelled.
+
+After identifying the misspelled words, the program should prompt the user to enter a word and it should report the number of times the word appeared in the file.
+
+Your program must do the following:
+
+Read the refernece file “ref.txt”. This file consists of words, one word per line. Use a dictaionry container to store the words that are in the ref.txt.
+Prompt the user for the name of the file to spell check. Program should read the words in the file and store the words in a dictionary container where the keys are the words in the file and values are the number of times the word is used in the file.
+Spellcheck each word and then display the words that were misspelled.
+Prompt the user to enter a word and return the number of times the word was used in the file
+Notes:
+
+Make sure to eliminate the punctuation when constructing the dictionary from the input file
+If numbers are being use in the input file, they shouldn’t be spellchecked
+sample.txt file is provided as a test case. Make sure your program provides the same results as shown below:
+You can download the ref.txt and sample.txt from the links below:
