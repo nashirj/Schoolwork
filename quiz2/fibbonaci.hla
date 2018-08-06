@@ -1,0 +1,110 @@
+/*
+
+SAMPLE C CODE:
+------------------------
+int main( )
+{
+  int value;
+  printf( "Provide a value: " );
+  scanf( "%d", &value );
+
+  int f = fib( value );
+  printf( "fib( %d ) = %d\n", value, f );
+
+  return( 0 );
+}
+
+int fib( int value ) 
+{
+    int fibo = 1;
+    int fiboPrev = 1;
+
+    for(int i = 2; i < n; ++i){
+        int temp = fibo;
+        fibo += fiboPrev;
+        fiboPrev = temp;
+    }
+    return fibo;
+}
+
+*/
+
+
+program problem23;
+#include ("stdlib.hhf");
+static
+user_in : int8;
+answer : int8;
+
+procedure fib( value : int8 ); @nodisplay; @noframe;
+static
+iReturnAddress : dword;
+fiboPrev : int8 := 1;
+fibo : int8 := 1;
+temp : int8;
+
+begin fib;
+// entry sequence
+pop(iReturnAddress);
+// acquire parameters on the stack ---
+pop(AX);
+// push back the return address
+push( iReturnAddress );
+// preserve registers ---
+push(BX);
+
+mov(AL, value);
+
+ForLp:
+InitializeForLp: // BL = 2
+mov( 2, BL );
+ForLpTerminationTest: // is BL >= value? then terminate for
+cmp( BL, value );
+jnl ForLpDone;
+ForLpBody:
+
+mov(fibo, BH);
+mov(BH, temp);
+add(fiboPrev, BH);
+mov(BH, fibo);
+mov(temp, BH);
+mov(BH, fiboPrev);
+
+ForLpIncrement:
+inc( BL ); 
+jmp ForLpTerminationTest;
+ForLpDone:
+
+mov(fibo, AL);
+
+// pop all preserved registers --- none
+pop(BX);
+
+pop(iReturnAddress);
+push(AX);
+push(iReturnAddress);
+
+ret();
+end fib;
+
+
+begin problem23;
+
+stdout.put("Provide a value: ");
+stdin.get(user_in);
+
+mov(user_in, AL);
+push(AX);
+
+call fib;
+
+pop(AX);
+mov(AL, answer);
+
+stdout.put("fib(");
+stdout.puti8(user_in);
+stdout.put(") = ");
+stdout.puti8(answer);
+stdout.newln();
+
+end problem23;

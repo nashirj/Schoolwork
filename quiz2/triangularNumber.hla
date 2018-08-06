@@ -1,0 +1,75 @@
+/*
+
+SAMPLE C CODE:
+------------------------
+int main( )
+{
+  int value, x;
+  printf( "Provide a value: " );
+  scanf( "%d", &value );
+
+
+  x = summingRec( value );
+  printf( "summingRec( %d ) equals %d!\n", value, x );
+
+  return( 0 );
+}
+
+ 
+
+int summingRec( int value ) 
+{
+    int result = 0;
+    if ( value >= 1 )
+    {
+        result = value + summingRec( value - 1 );
+    }
+
+    return( result );
+
+}
+
+*/
+
+
+program triNum;
+#include ("stdlib.hhf");
+static
+user_in : int8;
+answer : int8;
+
+procedure summingRec( value : int8 ); @nodisplay; @noframe;
+begin summingRec;
+add(AL, BL);
+dec( AL );
+// if we're not at 1, keep recursing
+cmp( AL, 1 );
+jge summingRecCall;
+jmp ExitSequence;
+summingRecCall:
+call summingRec;
+ExitSequence:
+ret();
+end summingRec;
+
+begin triNum;
+
+stdout.put("Provide a value: ");
+stdin.get(user_in);
+
+mov(user_in, AL);
+push(AX);
+mov(0, BL);
+push(BX);
+
+call summingRec;
+
+mov(BL, answer);
+
+stdout.put("summingrec(");
+stdout.puti8(user_in);
+stdout.put(") = ");
+stdout.puti8(answer);
+stdout.newln();
+
+end triNum;
