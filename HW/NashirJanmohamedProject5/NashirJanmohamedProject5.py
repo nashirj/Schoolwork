@@ -49,26 +49,24 @@ class BankAccount:
             print('Insufficient funds to withdraw $' + str(amount))
 
 
-    def applyAnnualInterest(self, amount, rate):
+    def applyInterest(self, amount, rate):
         return amount * rate
 
     def __str__(self):
         return("{}, account number {}, balance ${}".format(self.customer, self.accountNumber, self.balance))
-        
 
 
 class CheckingAccount(BankAccount):
-    def applyAnnualInterest(self):
+    def applyInterest(self):
         if (self.balance > 10000):
-            self.balance += BankAccount.applyAnnualInterest(self, self.balance - 10000, .02)
+            self.balance += BankAccount.applyInterest(self, self.balance - 10000, .02)
         else:
             print('Balance = $' + str(self.balance) + ', interest only applied on amount greater than $10000...')
 
 
-
 class SavingAccount(BankAccount):
-    def applyAnnualInterest(self):
-        self.balance += BankAccount.applyAnnualInterest(self, self.balance, .05)
+    def applyInterest(self):
+        self.balance += BankAccount.applyInterest(self, self.balance, .05)
         
 
     
@@ -86,20 +84,20 @@ def main():
     alinAccnt.withdraw(5000)
     print(alinAccnt)
     #Alin Smith (ssn: 111-11-1111) , account number 1702660396, balance $15000
-    alinAccnt.applyAnnualInterest()
+    alinAccnt.applyInterest()
     print(alinAccnt)
     #Alin Smith (ssn: 111-11-1111) , account number 1702660396, balance $15100.0
 
 
     maryAccnt.deposit(10000)
-    print(maryAccnt) 
+    print(maryAccnt)
     #Mary Lee (ssn: 222-22-2222) , account number 2552619508, balance $10000
     maryAccnt.withdraw(15000)
     #Mary Lee (ssn: 222-22-2222) , insufficent funds to withdraw $ 15000
     print(maryAccnt)
     #Mary Lee (ssn: 222-22-2222) , account number 2552619508, balance $10000
 
-    maryAccnt.applyAnnualInterest()
+    maryAccnt.applyInterest()
     print(maryAccnt) 
     #Mary Lee (ssn: 222-22-2222) , account number 2552619508, balance $10500.0
     
