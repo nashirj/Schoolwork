@@ -42,7 +42,7 @@ def format_dictionary(user_in):
 
 def get_user_in():
 	# Prompt the user for the name of the file to spell check.
-	filename = input('input file name: \n')
+	filename = input('input file name: ')
 	
 	while(True):
 		try:
@@ -82,8 +82,7 @@ def spell_check(user_in, dictionary):
 		word_no_caps = word.lower()
 		if word_no_caps not in dictionary:
 			print("misspelled word '", end='')
-			print(word, end='')
-			print("'")
+			print(word + "'")
 
 
 def create_user_dictionary(user_in):
@@ -126,6 +125,7 @@ def main():
 	#Prompt the user to enter a word and return the number of times the word was used in the file
 	word_count(create_user_dictionary(user_in))
 
-
-
 if __name__ == '__main__': main()
+
+
+
