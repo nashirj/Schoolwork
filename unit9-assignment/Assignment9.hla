@@ -4,16 +4,61 @@ Write an HLA Assembly language program that calculates student enrollment fees a
 
 The enrollment fee will be entered based on a single 8-bit value entered by the user. The fee will have the format: prsseeee, where ss is a two-bit value corresponding to the semester (00 for Fall, 01 for Winter, 10 for Spring or 11 for Summer), eeee is a four-bit value corresponding to the number of enrolled units, r is a single bit corresponding to whether the student is a California resident or not and p is a single bit corresponding to whether a parking decal is desired. The format of this bit field is diagrammed below:
 
-7 - parking decal?
-6 - CA resident?
-54 - semester?
-3210 - enrolled units?
-
+Packed Bit Field of Fees
 Since just 8 bits are being entered, your program should expect to read 2 hexidecimal digits.
+7 - parking decal
+6 - CA resident
+54 - semester
+3210 - enrolled units
 
+Below are some sample program dialogues that demonstrate these ideas.
+(Hint: Do this in small steps, bit-by-bit. There's alot to it... )
 (Further Hint: The most important part of this assignment is to worked with the packed data field entered by the user to extract the sub-parts out of it. The overlapping design of the Intel registers helps you parse this kind of data field and you can shift the bits around to get the right part into BH or BL, for example... )
 (Further Hint: You can read hex numbers by reading directly into a register.)
 (Final Hint: Since we haven't learned how to do multiplication yet, although it's kinda painful, I was expecting that you would perform the multiplication by a looping set of addition instructions)
+
+
+Feed me(2 hex digits with the bits prsseeee): CC
+Fall Semester
+12 units
+CA Resident
+Parking
+Total Fees = $ 688
+
+Feed me(2 hex digits with the bits prsseeee): 4C
+Fall Semester
+12 units
+CA Resident
+No Parking
+Total Fees = $ 603
+
+Feed me(2 hex digits with the bits prsseeee): 8C
+Fall Semester
+12 units
+Non-Resident
+Parking
+Total Fees = $ 4576
+
+Feed me(2 hex digits with the bits prsseeee): 0C
+Fall Semester
+12 units
+Non-Resident
+No Parking
+Total Fees = $ 4491
+
+Feed me(2 hex digits with the bits prsseeee): D1
+Winter Semester
+1 unit
+CA Resident
+Parking
+Total Fees = $ 139
+
+Feed me(2 hex digits with the bits prsseeee): 91
+Winter Semester
+1 unit
+Non-Resident
+Parking
+Total Fees = $ 463
 */
 
 

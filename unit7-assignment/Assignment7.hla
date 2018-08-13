@@ -1,18 +1,28 @@
-program Assignment7;
+/*
+PROGRAM 2: Binary Output
+Write an HLA Assembly program that prompts for an int8 value to inspect and then prints it in binary format. For example, here would be the program output for various entered values
 
+Gimme a decimal value to print: 15
+15 is 0000_1111
+Gimme a decimal value to print: 7
+7 is 0000_0111
+
+(Hint: There is no standard output that prints in binary output, so you need to do this yourself. In order to accomplish this, you need to move a bit at time into the carry flag and print 0 or 1, depending on what you find in the Carry bit. Shift and repeat this procedure 8 times and you are done! Eventually, we will learn how to loop, which would make this task much less terrible.)
+
+(Second Hint:LAHF pushes the Carry Bit and all the other flags out of the EFLAGS register and into AH. As an Assembly programmer, you have the power to mask out all the bits but the one you are interested in by using either AND or OR.)
+*/
+
+program Assignment7;
 
 #include ("stdlib.hhf");
 static
 user_in: int8;
 
-
 begin Assignment7;
-
 
 stdout.put("Gimme a decimal value to print: ");
 stdin.get(user_in);
 stdout.put(user_in, " is ");
-
 
 mov(user_in, BL);
 

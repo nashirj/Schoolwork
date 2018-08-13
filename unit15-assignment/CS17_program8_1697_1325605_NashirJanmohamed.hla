@@ -1,0 +1,133 @@
+/*
+PROGRAM 8: strlen Function
+Write an HLA Assembly language program that implements the following function:
+
+procedure strlen( baseStringAddress: dword ); @nodisplay; @noframe; 
+
+This function should return in AL the number of characters in the string parameter, passed by its base address. Here is a sample program dialogue:
+
+Feed Me: asdfasdf
+The String You Entered: asdfasdf Has Length = 8
+
+Feed Me: asdf
+The String You Entered: asdf Has Length = 4
+*/
+
+program LengthOfString;
+#include ("stdlib.hhf");
+#include ("cs17string.hla");
+const 
+nullchar : byte := 0;
+static
+stringData : dword;
+stringDataLen : uns16 := 3; // max number of chars 
+
+procedure strlen( baseStringAddress: dword ); @nodisplay; @noframe; 
+static
+dReturnAddress : dword;
+dEBXRegister : dword; // preserve EBX
+dECXRegister : dword; // preserve ECX
+dEDXRegister : dword; // preserve EDX
+iLen : int8 := 0;
+
+begin strlen;
+// entry sequence
+// this is the return address
+pop( dReturnAddress );
+pop( baseStringAddress );
+
+// preserve registers used
+//going to use EBX, ECX, EDX
+mov( EBX, dEBXRegister );
+mov( ECX, dECXRegister );
+mov( EDX, dEDXRegister );
+
+// push back the return address
+push( dReturnAddress );
+
+// preserve registers
+push(dEBXRegister);
+push(dECXRegister);
+push(dEDXRegister);
+
+// begin sub-task
+ForLoop:
+ForLoopInit:
+mov( 0, EDX ); // EDX is loop index i
+mov( baseStringAddress, EBX ); // EBX is address of A[i]
+ForLoopTerminationClause:
+mov([EBX + EDX], CH); //CH is current char
+cmp( CH , 0 ); //null terminator
+je ForLoopEnd;
+ForLoopBody:
+inc(iLen);
+ForLoopIncrement:
+inc( EDX ); // increment index
+jmp ForLoopTerminationClause;
+ForLoopEnd:
+
+mov(0, EAX);
+mov(iLen, AL);
+
+// leave the count in AL
+
+// restore the registers used
+pop(EDX);
+pop(ECX);
+pop(EBX);
+
+ret();
+
+end strlen;
+
+begin LengthOfString;
+stdout.put("Feed Me: ");
+
+// this code allocates a string of size 80
+
+mov( @size( int8 ), AL );
+mov( 80, BL );
+inc( BL ); //for null termination
+mul( BL ); //AL *= BL
+mov( 0, EBX );
+mov( AX, BX );
+malloc( EBX );
+mov( EAX, stringData ); //stringData holds a pointer to input?
+
+// let's try reading a value into the string
+mov( stringData, EAX ); //move pointer to EAX
+push( EAX ); //push pointer on stack
+mov( 80, CX );
+push( CX ); //push max size on stack
+
+call gets;
+
+// initialize EAX before calling the function.
+
+mov( 0, EAX );
+
+// send a string parameter to the function
+push( stringData ); //pushes a 32 bit address
+
+call strlen;
+
+// show the results
+stdout.put( "The String You Entered: " );
+
+//print string
+mov( stringData, EBX );
+push( EBX );
+call puts;
+
+stdout.put(" Has Length = ")
+stdout.puti8( AL ); //stdout.putc(AL);
+stdout.newln();
+
+end LengthOfString;
+
+
+
+
+
+
+

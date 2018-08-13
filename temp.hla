@@ -1,0 +1,23 @@
+program temp;
+#include ("stdlib.hhf");
+static
+iSixteen : int8 := 16;
+iFifteen : int8 := 15;
+
+begin temp;
+
+mov( iSixteen, AH ); 
+cmp( AH, iFifteen ); 
+jnb myLabel;
+jmp nope;
+
+myLabel:
+stdout.put("my lable", nl);
+jmp ending;
+
+nope:
+stdout.put("nope", nl);
+jmp ending;
+
+ending:
+end temp;

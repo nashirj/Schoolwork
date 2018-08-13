@@ -1,3 +1,10 @@
+/*
+double FPUSample( double x, double y ) {
+   return( sqrt( x*x + y*y ) );
+}
+*/
+
+
 program FPUSample;
 #include( "stdlib.hhf" );
 static
@@ -14,11 +21,11 @@ begin FPUSample;
   finit();
   fld( x );              // Load X.
   fld( st0 );            // Duplicate X on TOS.
-  fmulp();               // Compute X**2.
+  fmul();                // Compute X**2.
   fld( y );              // Load Y
   fld( st0 );            // Duplicate Y.
-  fmulp();               // Compute Y**2.
-  faddp();               // Compute X**2 + Y**2.
+  fmul();                // Compute Y**2.
+  fadd();                // Compute X**2 + Y**2.
   fsqrt();               // Compute sqrt( X**2 + Y**2 ).
   fstp( z );             // Store result away into Z.
 

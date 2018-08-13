@@ -1,3 +1,26 @@
+/*
+PROGRAM 3: Box It!
+Write an HLA Assembly language program that prompts for a specific int8 value named n and then displays a repeated digit pattern starting with that number. The repeated digit pattern should show all the numbers from 1 up to that number, each on its own row. There should be a total of n 1's on the first row. Then there should be a total of n 2's on the second row and so on all the way up to n. Shown below is a sample program dialogue.
+
+Gimme a decimal value to use as n: 6
+111111
+222222
+333333
+444444
+555555
+666666
+
+Gimme a decimal value to use as n: 4
+1111
+2222
+3333
+4444
+
+(Hint: I would recommend you write it first in C or Visual Basic and then translate your lines of code, one-by-one, into a assembly statements, just like our good friend mr. compiler does.)
+
+Rubric
+*/
+
 program Assignment8;
 #include ("stdlib.hhf");
 static

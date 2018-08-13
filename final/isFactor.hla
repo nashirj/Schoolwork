@@ -1,0 +1,132 @@
+/*
+Create an HLA function that checks whether a desired value happens to be a factor of another number.  For example, the factors of the number 12 happen to be 1, 12, 3, 4, 2 and 6 because 1 * 12 = 12, 3 * 4 = 12 and 2 * 6 = 12.
+
+
+This function should have the following signature:
+
+procedure isFactor( value : int16; desiredFactor : int16 );@nodisplay; @noframe;
+
+This function should return a boolean value of true if the desiredFactor parameter is a factor of the value parameter. Your function should replicate the following C code:
+
+bool isFactor( int value, int desiredFactor ) {
+
+bool result = false;
+if (desiredFactor > 0)
+{ 
+  while (value > 0)
+  {
+    value = value - factor;  
+    // eventually we will hit 0 or a negative number...
+  }
+  // if we hit zero, then the desiredFactor really is a factor of value!
+  if (value == 0)    result = true;
+}
+return( result );
+}
+
+IN ORDER TO RECEIVE FULL CREDIT, YOU CANNOT USE MULTIPLY OR DIVIDE INSTRUCTIONS.  Instead, please loop as shown above.
+
+IN ORDER TO RECEIVE FULL CREDIT, YOU MUST USE THE TEMPLATE SOLUTION SHOWN BELOW. Of course, you will need to add code to the function to implement the desired algorithm explained above. In addition, you will need to prepare and push the parameters to the function.
+
+*/
+
+// isFactor Template Solution For CS 17 Final
+// CS 17 Students must use this template as the basis for their solution. 
+// I hope it will help simplify your development task.
+// Please look at the two TODO: notes below
+program isFactorProgram;
+#include( "stdlib.hhf" );
+static
+
+iValue: int16 := 0;
+iFactor: int16 := 0;
+iAnswer : int32 := 0;
+
+// TODO: CS 17 Students add code below to implement this function
+// Several hints are supplied
+procedure isFactor( value : int16; desiredFactor : int16 );@nodisplay; @noframe;
+
+static
+dReturnAddress : dword;
+dEBXRegister : dword; // preserve EBX
+dECXRegister : dword; // preserve ECX
+dEDXRegister : dword; // preserve EDX
+
+begin isFactor;
+
+// entry sequence
+// this is the return address
+pop( dReturnAddress );
+
+// get stack parameters
+pop( desiredFactor );
+pop( value );
+stdout.put(value);
+stdout.newln();
+stdout.put(desiredFactor);
+stdout.newln();
+
+// preserve registers used
+mov(EBX, dEBXRegister);
+mov(ECX, dECXRegister);
+mov(EDX, dEDXRegister);
+
+// push back the return address
+push( dReturnAddress );
+
+// preserve registers
+push(dEBXRegister);
+push(dECXRegister);
+push(dEDXRegister);
+ 
+// begin sub-task
+Initialize:
+mov(value, BX);
+mov(desiredFactor, CX);
+TerminationClause:
+cmp(BX, 0);
+jl invalidFactor;
+je validFactor;
+Body:
+sub(CX, BX);
+jmp TerminationClause;
+
+// leave the answer in EAX
+invalidFactor:
+mov(false, EAX);
+jmp endSub;
+
+validFactor:
+mov(true, EAX);
+jmp endSub;
+
+endSub:
+// restore the registers used
+pop(EDX);
+pop(ECX);
+pop(EBX);
+
+ret();
+
+end isFactor;
+
+  
+begin isFactorProgram;
+
+ 
+mov( 16, iValue);
+mov( 7, iFactor );
+
+//COMPLETED - TODO: push parameters to the function.
+push(iValue);
+push(iFactor);
+
+call isFactor;
+
+mov( EAX, iAnswer );
+
+stdout.put( iAnswer );
+stdout.newln();
+
+ 
+end isFactorProgram;

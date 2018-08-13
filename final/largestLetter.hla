@@ -1,0 +1,161 @@
+/*
+Create an HLA function that loops through a single string argument and finds the largest letter in it. This function should have the following signature:
+
+procedure getLargest( stringData : dword ); @nodisplay; @noframe;
+
+This function should return into EAX the largest letter found in the stringData parameter. By "largest", I mean the ASCII code value which is the biggest.  To receive full credit, your getLargest( ) procedure must not allocate any storage.
+
+You must use the utility functions provided here (Links to an external site.)Links to an external site. by downloading this file. These are the some of the same routines you used in Unit 15.  Once you acquire the file, you can include it in your code by saying:
+#include( "cs17Final.hla" );
+
+Also, your function should replicate the following C code:
+
+int getLargest( char * stringData ) {
+    int i = 0;
+    int largest = stringData[ 0 ];
+    while ( stringData[ i ] != NULL ) {
+        int letter = stringData[ i ];
+        if (letter > largest) {
+            largest = letter;
+        }
+        i = i + 1;
+    }
+    return( largest );
+}
+*/
+
+// String Parameter Template Solution For CS 17 Final
+// CS 17 Students must use this template as the basis for their solution. 
+// I hope it will help simplify your development task.
+
+// Please look at the two TODO: notes below
+
+program StringProgram;
+
+#include( "stdlib.hhf" ); 
+// The file cs17Final.hla is downloadable from the hyperlink shown above.
+// Place it in the same folder as this hla file you are working on
+
+#include( "cs17Final.hla" );
+
+static stringData : dword;
+
+// TODO: CS 17 Students add code below to implement this function
+// Several hints are supplied
+
+procedure getLargest( stringData : dword ); @nodisplay; @noframe;
+static
+dReturnAddress : dword;
+dEBXRegister : dword; // preserve EBX
+dECXRegister : dword; // preserve ECX
+dEDXRegister : dword; // preserve EDX
+dstringData : dword;
+cMax : byte;
+
+begin getLargest;
+// entry sequence
+// this is the return address
+pop( dReturnAddress );
+pop( dstringData );
+
+
+// preserve registers used
+//going to use EBX, EDX
+mov( EBX, dEBXRegister );
+mov( ECX, dECXRegister );
+mov( EDX, dEDXRegister );
+
+// push back the return address
+push( dReturnAddress );
+
+// preserve registers
+push(dEBXRegister);
+push(dECXRegister);
+push(dEDXRegister);
+
+// begin sub-task
+ForLoop:
+ForLoopInit:
+mov( 0, EDX ); // EDX is loop index i
+mov( dstringData, EBX ); // EBX is address of A[i]
+mov( [EBX], CH ); // cMax = A[0]
+mov( CH, cMax );
+ForLoopTerminationClause:
+mov([EBX + EDX], CH); //CH is current char
+cmp( CH , 0 ); //null terminator
+je ForLoopEnd;
+ForLoopBody:
+cmp(CH, cMax);
+jle ForLoopIncrement;
+mov( CH, cMax );
+ForLoopIncrement:
+inc( EDX ); // increment index
+jmp ForLoopTerminationClause;
+ForLoopEnd:
+
+mov(0, EAX);
+mov(cMax, AL);
+
+// leave the count in EAX
+
+// restore the registers used
+pop(EDX);
+pop(ECX);
+pop(EBX);
+
+ret();
+ 
+end getLargest;
+
+ 
+begin StringProgram; 
+
+stdout.put( "Please enter a string to process", nl );
+
+// this code allocates a string of size 80
+
+mov( @size( int8 ), AL );
+mov( 80, BL );
+inc( BL ); //for null termination
+mul( BL ); //AL *= BL
+mov( 0, EBX );
+mov( AX, BX );
+malloc( EBX );
+mov( EAX, stringData ); //stringData holds a pointer to input?
+
+// let's try reading a value into the string
+mov( stringData, EAX ); //move pointer to EAX
+push( EAX ); //push pointer on stack
+mov( 80, CX );
+push( CX ); //push max size on stack
+
+call gets;
+
+// print the string
+
+stdout.put( "----> here is the string you entered: " );
+
+//stringData is pointer to inputted string
+mov( stringData, EAX );
+push( EAX );
+
+call puts;
+
+stdout.newln();
+
+// initialize EAX before calling the function.
+
+mov( 0, EAX );
+
+// COMPLETED - // TODO: send a string parameter to the function
+push( stringData ); //pushes a 32 bit address
+
+call getLargest;
+
+// show the results
+stdout.put( "result=" );
+stdout.put( EAX ); //stdout.putc(AL);
+stdout.newln();
+
+end StringProgram;
+

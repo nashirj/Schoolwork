@@ -1,3 +1,30 @@
+/*
+PROGRAM 5: Middle Finder
+Write an HLA Assembly language program that implements a function which correctly identifies which of three parameters is neither the largest nor the smallest and returns a boolean value in AL (1 when all three values are equal; 0 otherwise). This function should have the following signature:
+
+procedure middleFinder( x:int16; y:int16; z:int16 ); @nodisplay; @noframe;
+Shown below is a sample program dialogue.
+
+Feed Me X: 215
+Feed Me Y: 480
+Feed Me Z: 91
+215 in the middle!
+AL = 0
+
+Feed Me X: 0
+Feed Me Y: 0
+Feed Me Z: 0
+X and Y and Z are all equal!
+AL = 1
+
+Feed Me X: 221
+Feed Me Y: 100
+Feed Me Z: 40
+100 is in the middle!
+AL = 0
+*/
+
+
 //Write an HLA Assembly language program that implements a function which correctly identifies which of three parameters is neither the largest nor the smallest and returns a boolean value in AL (1 when all three values are equal; 0 otherwise). This function should have the following signature:
 
 program Unit11HW;
