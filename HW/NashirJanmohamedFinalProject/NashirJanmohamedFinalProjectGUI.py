@@ -1,4 +1,5 @@
-
+from tkinter import *
+from tkinter.messagebox import showinfo
 
 from urllib.request import urlopen, Request, urljoin
 
@@ -6,30 +7,13 @@ from urllib.request import urlopen, Request, urljoin
 def checkValidity(content, content_lst):
   valid = bool()
   if ('"status" : "NOT_FOUND"') in content:
-    valid = False
+    return False
   elif ('"status" : "ZERO_RESULTS"') in content:
-    valid = False
+    return False
   elif ('"status" : "MAX_ROUTE_LENGTH_EXCEEDED"') in content:
-    valid = False
+    return False
   else:
-    print("valid search")
-    value = content_lst[9][10:]
-    print(value)
-    return
-
-  if not valid:
-    start_ind = len('"destination_addresses" : [ "')
-    if content_lst[1][start_ind] == '"':
-      raise ValueError(self.origin + ' is not a valid starting point')
-    end_ind = content_lst[1].find(',')
-    start = content_lst[1][start_ind:end_ind] #need to extract this from json
-    start_ind = len('"origin_addresses" : [ "')
-    if content_lst[2][start_ind] == '"':
-      raise ValueError(self.origin + ' is not a valid starting point')
-    end_ind = content_lst[2].find(',')
-    end = content_lst[2][start_ind:end_ind] #need to extract this from json
-    print("distance between " + start + " and " + end + " not found")
-    #raise ValueError("distance between " + start + " and " + end + " not found")
+    return True
 
 
 
@@ -53,18 +37,19 @@ class Tour:
   urllib functions to get data from the web to find the distances between two locations in the tour and calculate the total distance.
   If a response does not contain a distance value, the method should raise a ValueError exception.
   '''
-  def distance(self, mode=None):
-    if mode is None:
+  def distance(self, mode):
+    if mode == '':
       self.mode = 'driving'
     else:
       self.mode = mode
     
+    unformatted_origin = self.origin[:self.origin.find(',')]
+    unformatted_destination = self.destination[:self.destination.find(',')]
+    
     self.origin = self.origin.replace(' ', '+')
+    self.origin = self.origin.replace(',', '')
     self.destination = self.destination.replace(' ', '+')
-    self.mode = 'biking' # or 'biking' or 'walking'
-    if self.mode != 'driving' and self.mode != 'biking' and self.mode != 'walking':
-      print("Invalid mode. valid modes are 'driving', 'biking', and 'walking'")
-      exit()
+    self.destination = self.destination.replace(',', '')
 
     url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins="
     url += self.origin
@@ -73,8 +58,7 @@ class Tour:
     url += "&mode="
     url += self.mode
     url += "&sensor=false" #tells the server that the application does not use a GPS locator
-    print(url)
-
+    
     #provided code to make request
     user_agent = 'Mozilla/5.0'
     headers = {'User-Agent': user_agent, }
@@ -83,15 +67,21 @@ class Tour:
   
     content = response.read().decode()
 
-    print(content)
-
     content_lst = content.split("\n")
     content_lst = [c.strip() for c in content_lst]
 
-    for i in content_lst:
-      print(i)
-    value = str()
-    checkValidity(content, content_lst)
+    value = checkValidity(content, content_lst)
+    if value:
+      distance = content_lst[9][10:]
+      print(distance)
+      return distance
+    else:
+      showinfo(message="distance between " + unformatted_origin + " and " + unformatted_destination + " not found")
+      raise ValueError("distance between " + unformatted_origin + " and " + unformatted_destination + " not found")
+      return False
+
+
+
 
 
 '''
@@ -110,26 +100,73 @@ If the user enters an invalid mode, a message box shows up indicating invalid mo
 If the distance was not found between the origin and the destination, a message box shows up indicating the distance was not found:
 '''
 
-class TourGui:
+class TourGui(Frame):
   def __init__(self):
-    print("new gui")
+    root = Tk()
+
+    root.title('Tour')
+  
+    Frame.__init__(self, root)
+    self.pack(side=TOP)
+
+    label1 = Label(self, text='Origin')
+    label1.grid(row=0, column=0)
+
+    self.OriginEntry = Entry(self)
+    self.OriginEntry.grid(row=1, column=0)
+
+    label2 = Label(self, text='Destination')
+    label2.grid(row=2, column=0)
+
+    self.DestinationEntry = Entry(self)
+    self.DestinationEntry.grid(row=3, column=0)
+
+    label3 = Label(self, text='Mode')
+    label3.grid(row=4, column=0)
+
+    self.ModeEntry = Entry(self)
+    self.ModeEntry.grid(row=5, column=0)
+
+    space1 = Label(self, text='')
+    space1.grid(row=6, column=0)
+
+    space2 = Label(self, text='')
+    space2.grid(row=7, column=0)
+
+    label4 = Label(self, text='Distance (m)')
+    label4.grid(row=8, column=0)
+
+    self.display_text = StringVar()
+    self.Distance = Entry(self, textvariable=self.display_text)
+    self.Distance.grid(row=9, columnspan=3)
+
+    button = Button(self, text='Get Distance', command=self.onClick)
+    button.grid(row=10, column=0, columnspan=2)
+
+    root.mainloop()
 
   def onClick(self):
-    print("clicked")
+    origin = self.OriginEntry.get().strip()
+    destination = self.DestinationEntry.get().strip()
+    mode = self.ModeEntry.get().strip()
+
+    if origin == '' or destination == '':
+      showinfo(message="please input an origin and a destination")
+      return
+
+    if mode != 'driving' and mode != 'biking' and mode != 'walking' and mode != '':
+      showinfo(message="Invalid mode. valid modes are 'driving', 'biking', and 'walking'")
+      return
+
+    tour = Tour(origin, destination)
+    distance = tour.distance(mode)
+    if distance == False:
+      return
+    showinfo(message=distance)
+
+    self.display_text.set(distance)
 
 
 
-
-def main():
-  #get parameters
-  t = Tour("New York, NY", "Paris France")
-  t.distance()
-
-
-  
-  
-  
-
-  
-
-if __name__ == "__main__":main()
+if __name__ == '__main__':
+  tGui = TourGui()
