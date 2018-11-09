@@ -1,0 +1,58 @@
+u = 1
+
+u =
+
+     1
+
+v = 3
+
+v =
+
+     3
+
+a = (4*u)/(3*v)
+
+a =
+
+    0.4444
+
+b = (2*v^-2)/((u+v)^2)
+
+b =
+
+    0.0139
+
+c = (v^3)/(v^3-u^3)
+
+c =
+
+    1.0385
+
+d = (4/3)*pi*v^2
+
+d =
+
+   37.6991
+
+helpdesk
+[Warning: HELPDESK will be removed in a future release. Use DOC instead.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('helpdesk', 'C:\Program Files\MATLAB\R2018b\toolbox\matlab\helptools\helpdesk.m', 10)" style="font-weight:bold">helpdesk</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2018b\toolbox\matlab\helptools\helpdesk.m',10,0)">line 10</a>)] 
+cd
+
+C:\Users\Nash\Documents\MATLAB
+
+doc
+mkdir
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mkdir')" style="font-weight:bold">mkdir</a>
+Not enough input arguments.
+} 
+mkdir mynewdir
+editpath
+{Undefined function or variable 'editpath'.
+} 
+editpath
+{Undefined function or variable 'editpath'.
+} 
+cd mynewdir\
+test2
+diary off
