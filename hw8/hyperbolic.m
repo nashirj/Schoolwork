@@ -12,8 +12,7 @@ case of an incorrect number of arguments and also the case of an invalid
 string. In either case, the function should generate an error.)
 %}
 function res = hyperbolic(fun, x)
-msg = nargchk(2,2,nargin);
-error(msg);
+narginchk(2,2);
     %sinh implementation
     function res = sinh1(x)
         res = (exp(x)-exp(-x))/2;
