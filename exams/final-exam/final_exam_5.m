@@ -28,9 +28,20 @@ A = rand(N);
 %}
 
 B = sum(A);
-s = size(A);
-A(s(1),:) = B;
 
+%{
+option 1
+[r,c]=size(A)
+returns r as rows and c as columns
+add one to r to assign it to B
+A(r+1,:) = B;
+%}
+
+%{
+option 2, Easier way is to use ; as new row operator:
+%}
+
+C = [A;B];
 
 %{
 2. Show using fprintf the value of and where the total is highest and
@@ -48,13 +59,16 @@ fprintf('The min total is %f and it occurs in column %d\n', total_min, min_ind);
 3. Calculate the average of the total, then how many values in the entire
 original array A are above the average. (4 points).
 %}
-avg = mean(B);
-greater_than_avg = find(A > avg);
-num_gta = size(greater_than_avg);
+
+%To find how many elements are > mean(B), 
+%sum(find(A>mean(B)))
+
+num_gta = size(find(C > mean(B)));
 disp(num_gta);
 
 %excluding B, i.e. original array A without appended row
-avg2 = mean(B)/s(1);
-greater_than_avg2 = find(A(1:end-1,:) > avg2);
+s = size(B);
+avg2 = mean(B)/s(2);
+greater_than_avg2 = find(C(1:end-1,:) > avg2);
 num_gta2 = size(greater_than_avg2);
 disp(num_gta2);
