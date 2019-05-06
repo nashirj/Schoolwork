@@ -15,7 +15,7 @@ struct BinarySearchTree::Node {
 //-------------- Binary Search Tree Function Implementations 
 //--
 //-- Public Interface functions
-//--		Completley Implemented, nothing to do.  These functions 
+//--		Completely Implemented, nothing to do.  These functions
 //--        call the recurive helper functions you will implement.
 //--
 // Constructor
@@ -25,14 +25,14 @@ BinarySearchTree::BinarySearchTree() :m_root(nullptr) {}
 BinarySearchTree::~BinarySearchTree() {
 
 	//Use the post order traversal to delete the nodes.
-	//lambda function to delete a node n: 
+	//lambda function to delete a node n:
 	//				[](Node* n) {delete n; } 
 	_postorder(m_root, [](Node* n) {delete n; });
 }
 
 void BinarySearchTree::printInorder() {
 
-	//Use inoder traversal to print values in a node in the tree.
+	//Use inorder traversal to print values in a node in the tree.
 	//lambda function to print the value in a node:
 	//				[](Node* n) {std::cout << n->value << std::endl; }
 	_inorder(m_root, [](Node* n) {std::cout << n->value << " "; });
@@ -106,19 +106,21 @@ void BinarySearchTree::_inorder(Node* node, std::function<void(Node*)> process) 
 	_inorder(node->left, process);
 	process(node);
 	_inorder(node->right, process);
-
 }
 
 void BinarySearchTree::_postorder(Node* node, std::function<void(Node*)> process) {
-
-	// *********** TODO *************
-	return; // This is only here to make the skeleton code compile
+    if (node == nullptr) return;
+    
+    _postorder(node->left, process);
+    _postorder(node->right, process);
+    process(node);
 }
 void BinarySearchTree::_preorder(Node* node, std::function<void(Node*)> process) {
-
-	// *********** TODO *************
-	return; // This is only here to make the skeleton code compile
-
+    if (node == nullptr) return;
+    
+    process(node);
+    _preorder(node->left, process);
+    _preorder(node->right, process);
 }
 
 // BinarySearchTree::_insert recursively inserts into the BST according 

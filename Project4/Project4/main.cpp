@@ -5,13 +5,16 @@
 
 #ifdef YOUR_OWN_TESTS_AS_YOU_PROGRAM
 #include"bst.h"
-void main() {
+#include<iostream>
+int main() {
 
 	BinarySearchTree bst;
+    
+    std::cout << "big flex\n";
 
 	// do stuff with the bst;
 
-	return;
+	return 0;
 }
 
 
@@ -22,13 +25,13 @@ void main() {
 //data structures, if you have list and/or the sorted doubly linked list implemented
 //feel free to modify the tests in test.h to include them.
 
-void main() {
+int main() {
 
 	int test_size = 5000;
 	test_insert(test_size);
 	test_search(test_size);
 
-	return;
+	return 0;
 }
 
 #elif defined(USE_LONGS_BST_TEST)  // Some tests I used to test my bst implementations
