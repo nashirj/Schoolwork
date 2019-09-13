@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 
 class ExponentDriverTest {
 
+	/**
+	 * This test passes positive rational and irrational bases to the iterative exponentiation
+	 * function and tests the precision of the result to 10 significant figures.  
+	 */
 	@Test
 	void testIterativeVersionWithPositiveExponents() {
 		System.out.println("TEST ITERATIVE FUNCTION WITH POSITIVE EXPONENTS");
@@ -28,6 +32,10 @@ class ExponentDriverTest {
 		System.out.println();
 	}
 	
+	/**
+	 * This test passes negative rational and irrational bases to the iterative exponentiation
+	 * function and tests the precision of the result to 10 significant figures.  
+	 */
 	@Test
 	void testIterativeVersionWithNegativeExponents() {
 		System.out.println("TEST ITERATIVE FUNCTION WITH NEGATIVE EXPONENTS");
@@ -45,6 +53,10 @@ class ExponentDriverTest {
 		System.out.println();
 	}
 	
+	/**
+	 * This test passes positive rational and irrational bases to the recursive exponentiation
+	 * function and tests the precision of the result to 10 significant figures.  
+	 */
 	@Test
 	void testRecursiveVersionWithPositiveExponents() {
 		System.out.println("TEST RECURSIVE FUNCTION WITH POSITIVE EXPONENTS");
@@ -67,6 +79,10 @@ class ExponentDriverTest {
 		System.out.println();
 	}
 	
+	/**
+	 * This test passes a negative power to the recursive exponentiation function and 
+	 * ensures that an exception is thrown.  
+	 */
 	@Test
 	void testRecursiveVersionThrowsException() {
 		System.out.println("TEST THAT RECURSIVE FUNCTION THROWS EXCEPTION WITH NEGATIVE EXPONENTS");

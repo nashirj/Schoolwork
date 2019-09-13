@@ -1,6 +1,10 @@
 package dice;
 
 public class BiasedPairOfDiceDriver {
+	/**
+	 * Driver code to demonstrate functionality of BiasedPairofDice class.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		PairOfDice dice = new BiasedPairOfDice();
 		

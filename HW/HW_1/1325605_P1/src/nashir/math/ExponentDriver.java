@@ -1,21 +1,27 @@
 package nashir.math;
 
 public class ExponentDriver {
+	/**
+	 * Main method to make claim that two implementations have same time complexity.
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		System.out.println("There is no difference in the time efficiency of these "
-				+ "two methods");
+		System.out.println("There is no difference in the time efficiency of these two methods");
 	}
 	/**
-	 * Time complexity O(n) -> number of iterations of the for loop based on input
-	 *   of size n.
-	 * Space complexity O(1) -> only constant extra space is used, amount of space used
-	 *   does not depend on input.
-	 * This method is able to handle negative numbers. 
+	 * This method raises the argument base to the argument power. This method is able to handle negative numbers. 
 	 * @param base, number to be exponentiated
 	 * @param power, number of times to multiply the base by itself
 	 * @return
 	 */
 	public static double calculateExponentIteratively(double base, double power) {
+		/**
+		 * Time complexity O(n) -> number of iterations of the for loop based on input
+		 *   of size n.
+		 * Space complexity O(1) -> only constant extra space is used, amount of space used
+		 *   does not depend on input.
+		 * 
+		 */
 		if (power == 0) {
 			return 1;
 		}
@@ -31,16 +37,16 @@ public class ExponentDriver {
 	}
 	
 	/**
-	 * Time complexity O(n) -> the number of calls that are executed based on input of
-	 *   size n.
-	 * Space complexity O(n) -> the number of calls that are placed on the stack based
-	 *   on input of size n.
-	 * This method is not able to handle negative numbers. 
+	 * This method raises the argument base to the argument power. This method is not able to handle negative numbers. 
 	 * @param base, number to be exponentiated
 	 * @param power, number of times to multiply the base by itself
 	 * @return
 	 */
 	public static double calculateExponentRecursively(double base, double power) throws IllegalArgumentException {
+		/**
+		 * Time complexity O(n) -> the number of calls that are executed based on input of size n.
+		 * Space complexity O(n) -> the number of calls that are placed on the stack based on input of size n.
+		 */
 		// this function does not handle negative exponents
 		if (power < 0) {
 			throw new IllegalArgumentException("Cannot recursively calculate negative exponents.");

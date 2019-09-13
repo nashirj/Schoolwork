@@ -1,12 +1,17 @@
 package dice;
 
 public class PairOfDiceDriver {
-
+	/**
+	 * Driver code to demonstrate functionality of PairofDice class.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		PairOfDice dice = new PairOfDice();
 		
+		// test value()
 		System.out.println("Initial dice state: " + dice + "\n");
 		
+		// test toString()
 		System.out.print("Print using implicit toString(): ");
 		System.out.println(dice);
 		System.out.print("Print using explicit toString(): ");
@@ -14,6 +19,7 @@ public class PairOfDiceDriver {
 		
 		int total = 0;
 		
+		// test distribution of scores
 		for (int i = 0; i < 10; i++) {
 			dice.roll();
 			System.out.println("Dice state: " + dice);
@@ -22,7 +28,6 @@ public class PairOfDiceDriver {
 		}
 		
 		System.out.println("average roll: " + total/10.0);
-		
 	}
 
 }

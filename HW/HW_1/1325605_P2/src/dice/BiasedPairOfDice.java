@@ -9,17 +9,45 @@ package dice;
  */
 
 public class BiasedPairOfDice extends PairOfDice {
+	/**
+	 * The default constructor initializes two superclass members d1 and d2 to integer values.
+	 */
 	public BiasedPairOfDice() {
-		this.roll(); // initializes d1 and d2
+		this.roll();
 	}
 	
+	/**
+	 * This roll function overrides the superclass roll function and calls a roll function with a bias towards
+	 * rolling 5s and 6s.
+	 */
 	@Override
 	public void roll() {
 		d1 = rollBiasedDie();
 		d2 = rollBiasedDie();
 	}
 	
+	/**
+	 * This function rolls a biased die such that 6 has a 1/3 probability of being rolled, 5 has a 2/9 probability of being
+	 * rolled, and 1 through 4 have a 1/9 probability of being rolled.
+	 * @return an integer in the range of [1, 6]
+	 */
 	private int rollBiasedDie() {
+		/**
+		 * This implementation inspired by https://introcs.cs.princeton.edu/java/13flow/RollLoadedDie.java.html
+		 * This approach is cleaner and more explicit about the probability than the solution I came up with.
+		 */
+		double rand = Math.random();
+		//rolls one through four have 1/9 probability of happening
+		if (rand < 1/9.0) return 1;
+		else if (rand < 2/9.0) return 2;
+		else if (rand < 3/9.0) return 3;
+		else if (rand < 4/9.0) return 4;
+		//roll five has 2/9 probability of happening
+		else if (rand < 6/9.0) return 5;
+		//roll six has 1/3 probability of happening
+		else return 6;
+		
+		// my original solution
 //		int ans = (int)(Math.random() * (numFaces * 2) + 1);
 //		//odds of 1 are 1/4: [1,3] == 1
 //		if (ans <= 3) {
@@ -44,20 +72,5 @@ public class BiasedPairOfDice extends PairOfDice {
 //		//odds of 6 are 1/12: [12] == 6
 //		//only one possibility at this point
 //		return 6;
-		
-		/**
-		 * This implementation inspired by https://introcs.cs.princeton.edu/java/13flow/RollLoadedDie.java.html
-		 * This approach is cleaner and more explicit about the probability than the solution I came up with above.
-		 */
-		double rand = Math.random();
-		//rolls one through four have 1/9 probability of happening
-		if (rand < 1/9.0) return 1;
-		else if (rand < 2/9.0) return 2;
-		else if (rand < 3/9.0) return 3;
-		else if (rand < 4/9.0) return 4;
-		//roll five has 2/9 probability of happening
-		else if (rand < 6/9.0) return 5;
-		//roll six has 1/3 probability of happening
-		else return 6;
 	}
 }
