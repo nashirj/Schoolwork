@@ -76,36 +76,48 @@ Fall, 2019}
   \item
   \textbf{Q.} Explain why $false$ is printed for this piece of code. How would you fix it to print $true$?
   \begin{lstlisting}
-String s1 = new String ("SMC");String s2 = new String ("SMC");System.out.println(s1 == s2);
+String s1 = new String ("SMC");
+String s2 = new String ("SMC");
+System.out.println(s1 == s2);
   \end{lstlisting}
   \textbf{A.}
-  This happens because {\huge blah}
+  This happens because the comparison on line three compares the address to which the references s1 and s2 point. If it is desired to compare the values contained in s1 and s2, we should use the .equals() method, i.e.
+  \begin{lstlisting}
+System.out.println(s1.equals(s2));
+  \end{lstlisting}
+  which compares the values rather than the memory location.
   \item
-  \textbf{Q.} True or False? Explain your answers.
+  True or False? Explain your answers.
   \begin{enumerate}[label=\Alph*]
-    \item You can define constructors for a Java interface.
+    \item \textbf{Q.} You can define constructors for a Java interface.
     \\\\
-    False. Explanation here {\huge blah}
+   \textbf{A.}
+   False. Constructors are only needed when we have an object, and objects are only created when we have a non-abstract class. Therefore, the definition and signature of these constructor methods are implemented at the discretion of the class implementing the interface.
     \\
-    \item Classes implement interfaces.
+    \item \textbf{Q.} Classes implement interfaces.
     \\\\
-    True. Explanation here {\huge blah}
+    \textbf{A.}
+    True. Interfaces provide a generic blueprint of behaviors that any number of classes may implement. Though they don't dictate how a method should operate internally, they provide a public API for which any class that ``implements'' the interface must provide a function definition.
     \\
-    \item Classes extend interfaces.
+    \item \textbf{Q.} Classes extend interfaces.
     \\\\
-    False. Explanation here {\huge blah}
+    \textbf{A.}
+    False. Classes extend other classes. In particular, derived classes often extend base classes in order to add specific behavior to a more general base class. For example, a Dog class may extend an Animal class and add a dig() method. While a derived class may only extend one base class, any class may implement any number of interfaces.
     \\
-    \item A class that implements an interface can include methods that are not required by the interface.
+    \item \textbf{Q.} A class that implements an interface can include methods that are not required by the interface.
     \\\\
-    True. Explanation here {\huge blah}
+    \textbf{A.}
+    True. An interface defines a specific set of methods a class must implement, but it does not prevent the class from implementing additional functionality.
     \\
-    \item A class that implements an interface can leave out methods that are required by an interface
+    \item \textbf{Q.} A class that implements an interface can leave out methods that are required by an interface.
     \\\\
-    False. Explanation here {\huge blah}
+    \textbf{A.}
+    False. A class must implement all methods defined in the API of an interface. By implementing the interface, the class enters a ``contract'' to provide the functionality laid out in the interface.
     \\
-    \item You can instantiate objects of an interface.
+    \item \textbf{Q.} You can instantiate objects of an interface.
     \\\\
-    False. Explanation here {\huge blah}
+    \textbf{A.}
+    False. Interfaces cannot be implemented; interfaces are often used to generalize a set of functionality that may have many possible implementations or applications.
     \\
   \end{enumerate}
 \end{enumerate}
