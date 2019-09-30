@@ -1,9 +1,9 @@
 package stack;
 
 public interface StackInterface<T> {
-	void pop() throws StackUnderflowException;
-	void push(T t) throws StackOverflowException;
-	T peek();
-	boolean isEmpty();
-	boolean isFull();
+	public void pop() throws StackUnderflowException;
+	public void push(T t) throws StackOverflowException;
+	public T top() throws StackUnderflowException;
+	public boolean isEmpty();
+	public boolean isFull();
 }
