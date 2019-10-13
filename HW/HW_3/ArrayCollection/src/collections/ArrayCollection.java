@@ -74,7 +74,7 @@ public class ArrayCollection<T> implements CollectionInterface<T>
 		{
 			elements[location] = elements[numElements - 1];
 			elements[numElements - 1] = null;
-			numElements--;  
+			numElements--;
 		}
 		return found;
 	}
@@ -133,4 +133,43 @@ public class ArrayCollection<T> implements CollectionInterface<T>
 
 		return s.toString();
 	}
+	
+	public int count(T target)
+	{
+		if (target == null) {
+			return 0;
+		}
+		int numMatches = 0;
+		for (int i = 0; i < numElements; i++) {
+			if (elements[i].equals(target)) {
+				numMatches++;
+			}
+		}
+		return numMatches;
+	}
+	
+	public void removeAll(T target) {
+		for (int i = 0; i < numElements; i++) {
+			while (elements[i].equals(target)) {
+				elements[i] = elements[numElements - 1];
+				elements[numElements - 1] = null;
+				numElements--;
+			}
+		}
+	}
+	
+	public ArrayCollection<T> combine(ArrayCollection<T> other) {
+		// allocate space for all elements of this and other collection with buffer of size DEFCAP
+		int newSize = this.numElements + other.numElements + this.DEFCAP;
+		ArrayCollection<T> newCollection = new ArrayCollection<T>(newSize);
+		for (int i = 0; i < numElements; i++) {
+			newCollection.add(elements[i]);
+		}
+		for (int i = 0; i < other.size(); i++) {
+			newCollection.add(other.elements[i]);
+		}
+		return newCollection;
+	}
+	
+	
 }
