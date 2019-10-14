@@ -4,9 +4,9 @@ import linkedlist.LLNode;
 
 public class LinkedQueue<T> implements QueueInterface<T> {
 
-	LLNode<T> front;
-	LLNode<T> rear;
-	public int size;
+	protected LLNode<T> front;
+	protected LLNode<T> rear;
+	protected int size;
 	
 	public LinkedQueue() {
 		front = null;
@@ -43,13 +43,12 @@ public class LinkedQueue<T> implements QueueInterface<T> {
 
 	@Override
 	public boolean isFull() {
-		return front == null;
+		return false;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return front == null;
 	}
 
 	@Override
@@ -75,7 +74,6 @@ public class LinkedQueue<T> implements QueueInterface<T> {
 		return s.toString();
 	}
 	
-	// TODO
 	public void remove(int N) throws QueueUnderflowException {
 		if (size() < N) {
 			throw new QueueUnderflowException("Cannot remove " + N + " elements when there are"
@@ -84,7 +82,6 @@ public class LinkedQueue<T> implements QueueInterface<T> {
 		
 		for (int i = 0; i < N; i++) {
 //			dequeue();
-			T val = front.getInfo();
 			front = front.getLink();
 			if (front == null) {
 				rear = null;

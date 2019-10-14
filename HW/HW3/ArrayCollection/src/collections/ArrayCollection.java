@@ -116,7 +116,7 @@ public class ArrayCollection<T> implements CollectionInterface<T>
 		return numElements;
 	}
 
-	// NASHIR JANMOHAMED'S METHODS
+	// NASHIR'S METHODS
 	public String toString()
 	{
 		if (numElements == 0) {

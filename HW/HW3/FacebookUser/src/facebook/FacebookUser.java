@@ -1,8 +1,8 @@
 package facebook;
 
 public class FacebookUser {
-	int numFriends;
-	String userName;
+	protected int numFriends;
+	protected String userName;
 	
 	public FacebookUser(int numFriends, String userName) {
 		this.numFriends = numFriends;

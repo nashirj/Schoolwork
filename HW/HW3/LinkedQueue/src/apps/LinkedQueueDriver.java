@@ -15,7 +15,7 @@ public class LinkedQueueDriver {
 		temp4 = new LLNode<String>("delta");
 		temp5 = new LLNode<String>("emma");
 
-		LinkedQueue<LLNode> q = new LinkedQueue();
+		LinkedQueue<LLNode<String>> q = new LinkedQueue<LLNode<String>>();
 		
 		try {
 			q.enqueue(temp1);
