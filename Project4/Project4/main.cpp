@@ -1,19 +1,114 @@
-
-
 #define  YOUR_OWN_TESTS_AS_YOU_PROGRAM
 
 
 #ifdef YOUR_OWN_TESTS_AS_YOU_PROGRAM
 #include"bst.h"
 #include<iostream>
+using std::cout;
+using std::endl;
+
 int main() {
 
 	BinarySearchTree bst;
+
+    cout << "height of bst: " << bst.height() << endl;
+
+    bst.insert(1);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(4);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(9);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(-2);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(-1);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(3);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(-3);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(-3);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(10);
+    cout << "height of bst: " << bst.height() << endl;
+    bst.insert(-5);
+    bst.insert(-4);
+
+    bst.printInorder();
+    bst.printPreorder();
+    bst.printPostorder();
+
+    if (bst.search(3)) {
+        cout << "contains" << endl;
+    } else {
+        cout << "something wrong" << endl;
+    }
+
+    if (!bst.search(20)) {
+        cout << "does not contain" << endl;
+    } else {
+        cout << "something wrong" << endl;
+    }
+
+    cout << bst.min() << endl;
+    cout << bst.max() << endl;
+
+    BinarySearchTree bst1;
+
+    bst1.insert(1);
+    bst1.insert(-4);
+    bst1.insert(4);
+    bst1.insert(3);
+    bst1.insert(5);
+    bst1.insert(-8);
+    bst1.insert(-6);
+
+    bst1.printInorder();
+    bst1.printPreorder();
+    bst1.printPostorder();
+
+    // test deleting node that is a leaf
+    bst1.remove(-6);
+    bst1.printPreorder();
+    bst1.printPostorder();
+
+    // reconstruct tree
+    bst1.insert(-6);
+
+    // test deleting node that has only right child
+    bst1.remove(-8);
+    bst1.printPreorder();
+    bst1.printPostorder();
+
+    // reconstruct tree
+    bst1.remove(-6);
+    bst1.insert(-8);
+    bst1.insert(-6);
+    bst1.printPreorder();
+    bst1.printPostorder();
+
+    // test deleting node that has only left child
+    bst1.remove(-4);
+    bst1.printPreorder();
+    bst1.printPostorder();
+
+    // reconstruct tree
+    bst1.remove(-6);
+    bst1.remove(-8);
+    bst1.insert(-4);
+    bst1.insert(-8);
+    bst1.insert(-6);
+    bst1.printPreorder();
+    bst1.printPostorder();
     
-    std::cout << "big flex\n";
-
-	// do stuff with the bst;
-
+    bst1.printTree();
+    
+    bst1.remove(1);
+    bst1.printPreorder();
+    bst1.printPostorder();
+    
+    bst1.printTree();
+    
 	return 0;
 }
 

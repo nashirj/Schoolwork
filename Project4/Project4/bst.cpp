@@ -108,6 +108,7 @@ void BinarySearchTree::_inorder(Node* node, std::function<void(Node*)> process) 
 	_inorder(node->right, process);
 }
 
+// Postorder Traversal: If this node is a leaf, process it, else traverse children before processing.
 void BinarySearchTree::_postorder(Node* node, std::function<void(Node*)> process) {
     if (node == nullptr) return;
     
@@ -115,6 +116,8 @@ void BinarySearchTree::_postorder(Node* node, std::function<void(Node*)> process
     _postorder(node->right, process);
     process(node);
 }
+
+// Preorder Traversal: Process this node, then traverse its children.
 void BinarySearchTree::_preorder(Node* node, std::function<void(Node*)> process) {
     if (node == nullptr) return;
     
@@ -123,42 +126,84 @@ void BinarySearchTree::_preorder(Node* node, std::function<void(Node*)> process)
     _preorder(node->right, process);
 }
 
-// BinarySearchTree::_insert recursively inserts into the BST according 
-// to the rules of the BST.  
+// BinarySearchTree::_insert
+// Recursively insert into the BST according to the rules of the BST
+// and return the root of the updated tree.
 BinarySearchTree::Node* BinarySearchTree::_insert(Node *node, int value) {
-
-	// *********** TODO *************
-	return nullptr; // This is only here to make the skeleton code compile
-
+    if (node == nullptr) {
+        //insert
+        node = new Node(value, nullptr, nullptr);
+        return node;
+    }
+    if (node->value > value) {
+        node->left = _insert(node->left, value);
+    }
+    if (node->value < value) {
+        node->right = _insert(node->right, value);
+    }
+    
+    // Implicit return if node->value == value, i.e. don't allow duplicates
+    return node;
 }
+
 // BinarySearchTree::_search
+// Recursively search for a node in the tree, return nullptr if not
+// found, else return the node.
 BinarySearchTree::Node* BinarySearchTree::_search(Node *node, int value) const {
-
-	// *********** TODO *************
-	return nullptr; // This is only here to make the skeleton code compile
-
+    if (node == nullptr) {
+        return nullptr;
+    }
+    
+    if (node->value > value) {
+        return _search(node->left, value);
+    }
+    if (node->value < value) {
+        return _search(node->right, value);
+    }
+    
+    // node->value == value
+    return node;
 }
-// BinarySearchTree::_height
+
 // Height of a binary tree is the height of the largest subtree + 1
 // An empty tree has height -1;
 int	BinarySearchTree::_height(Node* node) const {
-
-	// *********** TODO *************
-	return -9999; // This is only here to make the skeleton code compile
-
+    if (node == nullptr) {
+        return -1;
+    }
+    
+    return 1 + std::max(_height(node->right), _height(node->left));
 }
+
+// Return node with smallest value in BinarySearchTree
 BinarySearchTree::Node*	BinarySearchTree::_minNode(Node *node) const {
-
-	// *********** TODO *************
-	return nullptr; // This is only here to make the skeleton code compile
+    // Enclosing function assumes that m_root is not null, but this ensures
+    // function doesn't have undefined behavior if it is passed nullptr.
+    if (node == nullptr) {
+        return nullptr;
+    }
+    
+    if (node->left) {
+        return _minNode(node->left);
+    }
+    
+    return node;
 }
+
+// Return node with largest value in BinarySearchTree
 BinarySearchTree::Node*	BinarySearchTree::_maxNode(Node *node) const {
-
-	// *********** TODO *************
-	return nullptr; // This is only here to make the skeleton code compile
-
+    // Enclosing function assumes that m_root is not null, but this ensures
+    // function doesn't have undefined behavior if it is passed nullptr.
+    if (node == nullptr) {
+        return nullptr;
+    }
+    
+    if (node->right) {
+        return _maxNode(node->right);
+    }
+    
+    return node;
 }
-
 
 //BinarySearchTree::_deleteNode
 // Recursively removes a node in the binary tree.  The recursive algorithm will 
@@ -183,14 +228,48 @@ BinarySearchTree::Node*	BinarySearchTree::_maxNode(Node *node) const {
 // Bonus: recall that in the case of the two children node, we have a choice between
 // choosing a node in the left subtree or right subtree.  Either choice is correct so you 
 // can always choose one or the other.  However, you could make your algorithm slightly 
-// more sophisticed in that you can have decide on which subtree to choose based on 
+// more sophisticated in that you can decide on which subtree to choose based on
 // the height or max depth of the either subtree. I'll leave it to you to reason about this.  
 // 
 BinarySearchTree::Node*	BinarySearchTree::_deleteNode(Node *node, int value) {
-
-	// *********** TODO *************
-	return nullptr; // This is only here to make the skeleton code compile
-
+    if (node == nullptr) {
+        return nullptr;
+    }
+    
+    if (node->value == value) {
+        if (node->left && node->right) {
+            // TODO: handle this case
+            // Recurse on the smaller of the two subtrees
+            if (_height(node->left) < _height(node->right)) {
+                node->value = node->left->value;
+                node->left->value = value;
+                node->left = _deleteNode(node->left, value);
+            } else { // (left_subtree_depth >= right_subtree_depth)
+                node->value = node->right->value;
+                node->right->value = value;
+                node->right = _deleteNode(node->right, value);
+            }
+            // decide which way to traverse
+            // swap values of node->direction and node, then call _deleteNode
+        } else if (node->left) {
+            Node* del = node;
+            node = node->left;
+            delete del;
+        } else if (node->right) {
+            Node* del = node;
+            node = node->right;
+            delete del;
+        } else { //no children
+            delete node;
+            node = nullptr;
+        }
+    } else if (node->value > value) {
+        node->left = _deleteNode(node->left, value);
+    } else { // (node->value < value)
+        node->right = _deleteNode(node->right, value);
+    }
+    
+    return node;
 }
 
 
@@ -204,7 +283,13 @@ BinarySearchTree::Node*	BinarySearchTree::_deleteNode(Node *node, int value) {
 //		print value 
 //		traverse left
 void BinarySearchTree::_printTree(Node *node, int space = 0) const {
-
-	// *********** TODO *************
-	return; // This is only here to make the skeleton code compile
+    if (node == nullptr) return;
+    
+    _printTree(node->right, space + 4);
+    // Prints n spaces, where n is the value of space
+    std::cout << std::string(space, ' ');
+    std::cout << node->value << std::endl;
+    _printTree(node->left, space + 4);
+    
+    return;
 }
