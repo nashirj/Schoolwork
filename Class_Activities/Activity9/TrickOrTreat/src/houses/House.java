@@ -46,6 +46,7 @@ public class House implements Comparable {
 //			return -1;
 //		else
 //			return 0;
+		// this is a quick trick that works for integers, be careful trying this on float compareTo
 		return this.amountOfCandy - h.amountOfCandy;
 	}
 }
