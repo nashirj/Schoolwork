@@ -25,7 +25,7 @@ public class CardDeck
     for (Card.Suit suit : Card.Suit.values())
        for (Card.Rank rank : Card.Rank.values())
        {
-         image = new ImageIcon("support/cards/" + suit + "_" + rank + "_RA.gif");     
+         image = new ImageIcon("src/support/cards/" + suit + "_" + rank + "_RA.gif");     
          deck.add(new Card(rank, suit, image));
        }
     deal = deck.iterator();
