@@ -28,7 +28,7 @@
 ### To clone only a part of this repo, use Subversion
 Note: Subversion can be installed on MacOS using homebrew with the terminal command: `brew install svn`
 
-* `svn ls https://github.com/nashirj/Schoolwork.git/trunk/foo`
-* `svn export https://github.com/nashirj/Schoolwork.git/trunk/foo`
+* `svn ls https://github.com/nashirj/Schoolwork/trunk/foo`
+* `svn export https://github.com/nashirj/Schoolwork/trunk/foo`
 
-These commands will download the folder `foo` from the repo `Schoolwork.git`
+These commands will download the folder `foo` from the repo `Schoolwork`
