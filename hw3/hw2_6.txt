@@ -1,0 +1,29 @@
+a) result =
+
+     1     4
+    -1     6
+b) result =
+
+     2     1
+    -1     4
+c) result =
+
+     2     0
+     0     4
+d) Not valid - the number of columns in first matrix must match number of rows in second matrix
+e) result =
+
+     4     1
+    -2     4
+f) result =
+
+   -2.0000    3.5000
+    1.0000    0.5000
+g) result =
+
+   -2.0000    0.3333
+      -Inf    2.0000
+h) result =
+
+    0.5000    1.0000
+    1.0000   16.0000
