@@ -1,0 +1,10 @@
+Loop - https://drive.google.com/file/d/0B90toTJ-lCSJa0RodjZ6Rm9fd1U/view
+Defining Function - https://drive.google.com/file/d/0B90toTJ-lCSJUnFkVXNFOHdxY2s/view
+StringFormat - https://drive.google.com/file/d/0B90toTJ-lCSJYklmRmtiNlUyNjA/view
+changeFilePointerPosition - https://drive.google.com/file/d/0B90toTJ-lCSJOGd3NGlrZkY5aTQ/view
+Exception Control Flow - https://drive.google.com/file/d/0B90toTJ-lCSJdUNrOXQybWY2V0k/view
+Dictionary - https://drive.google.com/file/d/0B90toTJ-lCSJVmtjbk82STA1a1U/view
+RandomSampling - https://drive.google.com/file/d/0B90toTJ-lCSJNVNlcWpvUzFDWGc/view
+RectangleDemo - https://drive.google.com/file/d/0B90toTJ-lCSJdEFmUFp6cUwtT1U/view
+Gui3 - https://drive.google.com/file/d/0B90toTJ-lCSJakppaUR5ZnZTNXc/view
+url - https://drive.google.com/file/d/0B90toTJ-lCSJa1F2R3gyWTYwTWM/view
