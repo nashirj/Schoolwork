@@ -1,0 +1,24 @@
+John
+Atanasoff
+1903
+Invented digital computer in 1930.
+Charles
+Babbage
+1791
+Concept of machine that could be programmed.
+Tim
+Berners-Lee
+1955
+"Inventor" of the World Wide Web.
+Anita
+Borg
+1949
+Founding director of IWT.
+John
+von Neumann
+1903
+Key figure in the development of the digital computer.
+Alan
+Turing
+1912
+Regarded as the father of modern computer science.

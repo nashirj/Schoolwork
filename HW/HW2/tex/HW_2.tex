@@ -1,0 +1,129 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[T1]{fontenc} %escribe lo del teclado
+\usepackage[utf8]{inputenc} %Reconoce algunos símbolos
+\usepackage{lmodern} %optimiza algunas fuentes
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{hyperref} % Uso de links
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{enumitem}
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{CS20B: HW 2}
+\author{Nashir Janmohamed\\
+Fall, 2019}
+
+\maketitle
+\section{Questions}
+\begin{enumerate}
+  \item
+  \textbf{Q.} Explain why $false$ is printed for this piece of code. How would you fix it to print $true$?
+  \begin{lstlisting}
+String s1 = new String ("SMC");
+String s2 = new String ("SMC");
+System.out.println(s1 == s2);
+  \end{lstlisting}
+  \textbf{A.}
+  This happens because the comparison on line three compares the address to which the references s1 and s2 point. If it is desired to compare the values contained in s1 and s2, we should use the .equals() method, i.e.
+  \begin{lstlisting}
+System.out.println(s1.equals(s2));
+  \end{lstlisting}
+  which compares the values rather than the memory location.
+  \item
+  True or False? Explain your answers.
+  \begin{enumerate}[label=\Alph*]
+    \item \textbf{Q.} You can define constructors for a Java interface.
+    \\\\
+   \textbf{A.}
+   False. Constructors are only needed when we have an object, and objects are only created when we have a non-abstract class. Therefore, the definition and signature of these constructor methods are implemented at the discretion of the class implementing the interface.
+    \\
+    \item \textbf{Q.} Classes implement interfaces.
+    \\\\
+    \textbf{A.}
+    True. Interfaces provide a generic blueprint of behaviors that any number of classes may implement. Though they don't dictate how a method should operate internally, they provide a public API for which any class that ``implements'' the interface must provide a function definition.
+    \\
+    \item \textbf{Q.} Classes extend interfaces.
+    \\\\
+    \textbf{A.}
+    False. Classes extend other classes. In particular, derived classes often extend base classes in order to add specific behavior to a more general base class. For example, a Dog class may extend an Animal class and add a dig() method. While a derived class may only extend one base class, any class may implement any number of interfaces.
+    \\
+    \item \textbf{Q.} A class that implements an interface can include methods that are not required by the interface.
+    \\\\
+    \textbf{A.}
+    True. An interface defines a specific set of methods a class must implement, but it does not prevent the class from implementing additional functionality.
+    \\
+    \item \textbf{Q.} A class that implements an interface can leave out methods that are required by an interface.
+    \\\\
+    \textbf{A.}
+    False. A class must implement all methods defined in the API of an interface. By implementing the interface, the class enters a ``contract'' to provide the functionality laid out in the interface.
+    \\
+    \item \textbf{Q.} You can instantiate objects of an interface.
+    \\\\
+    \textbf{A.}
+    False. Interfaces cannot be implemented; interfaces are often used to generalize a set of functionality that may have many possible implementations or applications.
+    \\
+  \end{enumerate}
+\end{enumerate}
+
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}

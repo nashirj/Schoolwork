@@ -1,0 +1,109 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[T1]{fontenc} %escribe lo del teclado
+\usepackage[utf8]{inputenc} %Reconoce algunos símbolos
+\usepackage{lmodern} %optimiza algunas fuentes
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{hyperref} % Uso de links
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{enumitem}
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{CS20B: HW 4}
+\author{Nashir Janmohamed\\
+Fall, 2019}
+
+\maketitle
+\section{Questions}
+\begin{enumerate}
+  \item Assum strings is an Iterable list of String objects. Using a while loop, list and iterator operations, create code with functionality equivalent to
+  \begin{lstlisting}
+for (String hold : strings)
+    System.out.println(hold);
+}
+  \end{lstlisting}
+  The above code is equivalent to:
+    \begin{lstlisting}
+Iterator<String> iter = strings.iterator();
+while (iter.hasNext()) {
+    System.out.println(iter.next());
+}
+  \end{lstlisting}
+  \item For each of the following lists, describe several useful ways they might be sorted.
+  \begin{enumerate}
+    \item Books
+    \begin{enumerate}
+      \item Author's last name
+      \item Genre
+      \item Title of book
+      \item Number of pages
+    \end{enumerate}
+    \item University course descriptions
+    \begin{enumerate}
+      \item Major
+      \item Course Number
+      \item Instructor
+      \item Course Title
+    \end{enumerate}
+    \item Professional basketball information
+    \begin{enumerate}
+      \item Team
+      \item Player
+      \item Year
+    \end{enumerate}
+    \item Summer camper registration information
+    \begin{enumerate}
+      \item Camper Last Name
+      \item Camper Age
+    \end{enumerate}
+    \item Shopping items
+    \begin{enumerate}
+      \item Price
+      \item Type (i.e. fruit, vegetable, dairy)
+      \item Store (i.e. where to buy)
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
