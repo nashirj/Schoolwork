@@ -1,0 +1,7 @@
+In this project, you will create a Calculator application. The Calculator should have the following Graphical User Interface (GUI). You must use OO GUI principles to implement this application.
+The GUI consists of the following widgets:
+Widget Frame: the widget Frame is used to house the keys and the entry field in a grid.
+Widgent Button: it is used to represnent the calculator keys. When user clicks on keys, the key text should appear in the entry field.
+Widget Entry: the widget Entry is used to display what expression is calculated and the result of calculation. When calculator application starts, the field displays value 0.
+When user clicks AC, the field is reset and displays 0. When user clicks on the calculator keys, the full expression that is calculated should be displayed:
+When user clicks '=', the field shows the result of calculation:
