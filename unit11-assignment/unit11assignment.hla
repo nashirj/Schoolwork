@@ -1,0 +1,184 @@
+/*
+PROGRAM 5: Middle Finder
+Write an HLA Assembly language program that implements a function which correctly identifies which of three parameters is neither the largest nor the smallest and returns a boolean value in AL (1 when all three values are equal; 0 otherwise). This function should have the following signature:
+
+procedure middleFinder( x:int16; y:int16; z:int16 ); @nodisplay; @noframe;
+Shown below is a sample program dialogue.
+
+Feed Me X: 215
+Feed Me Y: 480
+Feed Me Z: 91
+215 in the middle!
+AL = 0
+
+Feed Me X: 0
+Feed Me Y: 0
+Feed Me Z: 0
+X and Y and Z are all equal!
+AL = 1
+
+Feed Me X: 221
+Feed Me Y: 100
+Feed Me Z: 40
+100 is in the middle!
+AL = 0
+*/
+
+
+//Write an HLA Assembly language program that implements a function which correctly identifies which of three parameters is neither the largest nor the smallest and returns a boolean value in AL (1 when all three values are equal; 0 otherwise). This function should have the following signature:
+
+program Unit11HW;
+#include ("stdlib.hhf");
+static
+x16 : int16:= 0;
+y16 : int16:= 0;
+z16 : int16:= 0;
+
+// This procedure selects the middle of the parameter passed
+// The middle value will be tossed into DH for the caller
+procedure middleFinder( x:int16; y:int16; z:int16 ); @nodisplay; @noframe;
+static
+iReturnAddress : dword;
+iMiddle : int16;
+iTemporary : int16;
+iRegisterValue : dword;
+
+begin middleFinder;
+// entry sequence
+// preserve registers --- ECX (used to get input from user)
+mov( ECX, iRegisterValue );
+// acquire parameters on the stack
+pop( iReturnAddress );
+pop( iTemporary ); // this is junk to align the stack
+pop( iTemporary ); // this is z
+mov( iTemporary, BX );
+mov( BX, z );
+pop( iTemporary ); // this is y
+mov( iTemporary, BX );
+mov( BX, y );
+pop( iTemporary ); // this is x
+mov( iTemporary, BX );
+mov( BX, x );
+// push back the return address
+push( iReturnAddress );
+// preserve registers --- none
+push( iRegisterValue );
+
+//figure out if x = y = z
+mov(x, CX);
+cmp(CX, y);
+jne notEqual;
+cmp(CX, z); //could do y, z - same result b/c of transitivity
+jne notEqual;
+mov(1, AL);
+jmp endEqualityTest;
+notEqual:
+mov(0, AL);
+endEqualityTest:
+
+//x <= y <= z?
+case1:
+mov(y, CX);
+cmp(CX, x);
+jl case2;
+cmp(CX, z);
+jg case2;
+mov(CX, DX);
+jmp exitProcedure;
+
+//x <= z <= y?
+case2:
+mov(z, CX);
+cmp(CX, x);
+jl case3;
+cmp(CX, y);
+jg case3;
+mov(CX, DX);
+jmp exitProcedure;
+
+//y <= x <= z?
+case3:
+mov(x, CX);
+cmp(CX, y);
+jl case4;
+cmp(CX, z);
+jg case4;
+mov(CX, DX);
+jmp exitProcedure;
+
+//y <= z <= x?
+case4:
+mov(z, CX);
+cmp(CX, y);
+jl case5;
+cmp(CX, x);
+jg case5;
+mov(CX, DX);
+jmp exitProcedure;
+
+//z <= x <= y?
+case5:
+mov(x, CX);
+cmp(CX, z);
+jl case6;
+cmp(CX, y);
+jg case6;
+mov(CX, DX);
+jmp exitProcedure;
+
+//z <= y <= x?
+case6:
+mov(y, CX);
+cmp(CX, z);
+jl exitProcedure;
+cmp(CX, x);
+jg exitProcedure;
+mov(CX, DX);
+//jmp exitProcedure;
+
+exitProcedure:
+// pop all preserved registers --- none
+pop( ECX );
+ret();
+end middleFinder;
+
+
+
+begin Unit11HW;
+stdout.put("Feed Me X: ");
+stdin.get(x16);
+stdout.put("Feed Me Y: ");
+stdin.get(y16);
+stdout.put("Feed Me Z: ");
+stdin.get(z16);
+
+mov( x16, CX );
+push( CX );
+mov( y16, CX );
+push( CX );
+mov( z16, CX );
+push( CX ); 
+// not even multiple of 32-bits pushed onto stack, so I am pushing one last piece of junk
+mov( 0, CX );
+push( CX );
+
+call middleFinder; // calling middle( x, y, z );
+
+cmp( AL, 1 );
+jz allEqual;
+
+stdout.puti16(DX);
+stdout.put(" (is) in the middle!", nl);
+//the prompt has both "in the middle" and "is in the middle", wasn't sure which one to use
+jmp doneMiddle;
+
+allEqual:
+stdout.put("X and Y and Z are all equal!", nl);
+
+doneMiddle:
+
+stdout.put("AL = ");
+stdout.puti8(AL);
+stdout.newln();
+
+end Unit11HW;

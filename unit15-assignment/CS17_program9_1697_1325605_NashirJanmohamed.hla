@@ -1,0 +1,259 @@
+/*
+PROGRAM 9: Swapper
+Write an HLA Assembly language program that implements a function which correctly sorts three parameters and returns a boolean value in AL which should be set to true if any swaps were performed to sort the sequence in increasing order. This function should have the following signature:
+
+procedure swapper( var x : int16; var y : int16; var z : int16 ); @nodisplay; @noframe; 
+
+After invoking the function, the value of x <= the value of y <= the value of z. Your function must use reference parameters, changing the callers version of the variables passed to the function. Here is a sample program dialogue:
+
+Gimme X: 12
+Gimme Y: 1
+Gimme Z: 50
+After sorting, X = 1, Y = 12, Z = 50
+
+Gimme X: 100
+Gimme Y: 10
+Gimme Z: 2
+After sorting, X = 2, Y = 10, Z = 100
+
+HINT: Even though the parameters are listed as int16, HLA expects you will pass them as memory addresses, requiring a full 32-bit value. So you'll have to use extended registers to hold the parameters, not 16-bit registers!
+*/
+
+
+program SwapValues;
+#include ("stdlib.hhf");
+static
+iX : int16 := 0; // the user data
+iY : int16 := 0;
+iZ : int16 := 0;
+
+
+procedure swapper( var x : int16; var y : int16; var z : int16 ); @nodisplay; @noframe;
+static
+dReturnAddress : dWord;
+dEDXRegister : dword := 0; // preserve EDX 
+dECXRegister : dword := 0; // preserve ECX
+dEBXRegister : dword := 0; // preserve EBX
+min : int16;
+mid : int16;
+max : int16;
+
+begin swapper;
+mov( EBX, dEBXRegister );
+mov( ECX, dECXRegister );
+mov( EDX, dEDXRegister );
+pop( dReturnAddress ); // This is the return address
+pop( EBX ); // This is the address of iZ
+pop( ECX ); // This is the address of iY
+pop( EDX ); // This is the address of iX
+// push back the return address
+push( dReturnAddress );
+// preserve registers
+push( dEDXRegister );
+push( dECXRegister );
+push( dEBXRegister );
+
+mov( EBX, dEBXRegister ); // This is the address of iZ
+mov( ECX, dECXRegister ); // This is the address of iY
+mov( EDX, dEDXRegister ); // This is the address of iX
+
+
+mov(0, EAX);
+mov([EBX], EAX);
+mov(AX, BX); //this is Z
+mov(0, EAX);
+mov([ECX], EAX);
+mov(AX, CX); //this is Y
+mov(0, EAX);
+mov([EDX], EAX);
+mov(AX, DX); //this is X
+
+
+
+// begin sub-task
+// put min in minVal;
+// put max in maxVal;
+// put remaining in midVal;
+case1:
+//stdout.put("case 1", nl);
+cmp( DX, CX ); //compare X to Y
+jg case5;
+jmp case2;
+
+case2:
+//stdout.put("case 2", nl);
+cmp( DX, BX ); //compare X to Z
+jg case4;
+jmp case3;
+
+case3:
+//stdout.put("case 3", nl);
+//min = x
+mov(DX, min);
+jmp case8;
+
+case4:
+//stdout.put("case 4", nl);
+//stdout.put("z ≤ x ≤ y", nl)
+//min = z, mid = x, max = y
+//max = y
+mov(CX, max);
+//min = z
+mov(BX, min);
+//mid = x
+mov(DX, mid);
+jmp outOfOrder;
+
+case5:
+//stdout.put("case 5", nl);
+cmp(DX, BX);
+jg case7;
+jmp case6;
+
+case6:
+//stdout.put("case 6", nl);
+//stdout.put("y ≤ x ≤ z", nl)
+//min = y, mid = x, max = z
+//max = z
+mov(BX, max);
+//mid = x
+mov(DX, mid);
+//min = y
+mov(CX, min);
+jmp outOfOrder;
+
+case7:
+//stdout.put("case 7", nl);
+//max = x
+mov(DX, max);
+jmp case11;
+
+case8:
+//stdout.put("case 8", nl);
+cmp(CX, BX);
+jg case10;
+jmp case9;
+
+case9:
+//stdout.put("case 9", nl);
+//stdout.put("x ≤ y ≤ z", nl);
+jmp inOrder;
+
+case10:
+//stdout.put("case 10", nl);
+//stdout.put("x ≤ z ≤ y", nl)
+//mid = z, max = y
+mov(BX, mid);
+mov(CX, max);
+jmp outOfOrder;
+
+case11:
+//stdout.put("case 11", nl);
+cmp(CX, BX);
+jg case13;
+jmp case12;
+
+case12:
+//stdout.put("case 12", nl);
+//stdout.put("y ≤ z ≤ x", nl)
+//mid = z, min = y
+mov(BX, mid);
+mov(CX, min);
+jmp outOfOrder;
+
+case13:
+//stdout.put("case 13", nl);
+//stdout.put("z ≤ y ≤ x", nl)
+//mid = y, min = z
+mov(CX, mid);
+mov(BX, min);
+jmp outOfOrder;
+
+
+
+
+outOfOrder:
+/*
+stdout.put("out of order", nl);
+stdout.puti16(min);
+stdout.puti16(mid);
+stdout.puti16(max);
+stdout.newln();
+*/
+
+//make swaps
+mov( dEDXRegister, EDX ); // This is the address of iX
+mov( min, AX );
+mov( EAX, [EDX] );
+//stdout.puti16([EDX]);
+
+mov( dECXRegister, ECX ); // This is the address of iY
+mov( mid, AX );
+mov( EAX, [ECX] );
+//stdout.puti16([ECX]);
+
+mov( dEBXRegister, EBX ); // This is the address of iZ
+mov( max, AX );
+mov( EAX, [EBX] );
+//stdout.puti16([EBX]);
+//stdout.newln();
+
+//set AL to true, swaps made
+mov(0, EAX); //clear
+mov(true, AL);
+jmp endSub;
+
+
+
+
+inOrder:
+stdout.put("in order", nl);
+//set AL to false, no swaps made
+mov(0, EAX); //clear
+mov(false, AL);
+jmp endSub;
+
+
+
+endSub:
+// exit sequence
+// restore registers
+pop( EBX );
+pop( ECX );
+pop( EDX );
+//return to main
+ret();
+end swapper;
+
+
+begin SwapValues;
+stdout.put( "Gimme X: " );
+stdin.get( iX );
+stdout.put( "Gimme Y: " );
+stdin.get( iY );
+stdout.put( "Gimme Z: " );
+stdin.get( iZ );
+lea( EAX, iX ); // get address of X
+push( EAX );
+lea( EAX, iY ); // get address of Y
+push( EAX );
+lea( EAX, iZ ); // get address of Z
+push( EAX );
+
+
+call swapper;
+
+
+stdout.put("After sorting, X = ");
+stdout.puti16(iX);
+stdout.put(", Y = ");
+stdout.puti16(iY);
+stdout.put(", Z = ");
+stdout.puti16(iZ);
+stdout.newln();
+
+end SwapValues;
+
+
+
+

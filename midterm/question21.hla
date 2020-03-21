@@ -1,0 +1,88 @@
+/*
+   Create an HLA Assembly language program that prompts for values, one-by-one, until the user enters zero.  With each new entered number, keep track of the largest number entered so far and how many times that largest number changes as new larger numbers are encountered.
+
+Here are some example program dialogues to guide your efforts:
+
+Gimme data: 12
+Gimme data: 1
+Gimme data: 30
+Gimme data: 4
+Gimme data: 40
+Gimme data: 5
+Gimme data: 0
+There were 2 swaps and the biggest number entered was 40.
+
+(If you don't see why it got the answer it did, 12 was the biggest number until it encountered 30.  That would be the first swap.  Then 30 was the biggest number until it encountered 40. That would be the second swap...)
+
+Gimme data: 3
+Gimme data: 1
+Gimme data: 4
+Gimme data: 5
+Gimme data: 6
+Gimme data: 12
+Gimme data: 0
+There were 4 swaps and the biggest number entered was 12.
+
+(If you don't see why it got the answer it did, 3 was the biggest number until it encountered 4.  That would be the first swap.  Then 4 was the biggest number until it encountered 5. That would be the second swap.  Then 5 was the biggest number until it encountered 6.  That would be the third swap.  Then 6 was the biggest number until it encountered 12.  That would be the fourth swap...)
+
+
+In an effort to help you focus on building an Assembly program, I’d like to offer you the following C statements which match the program specifications stated above. If you like, use them as the basis for building your Assembly program.
+
+SAMPLE C CODE:
+------------------------
+
+int current, nextNumber;
+int swapCounter = 0;
+
+printf( "Gimme data: " );
+scanf( "%d", &current );
+do
+{
+ printf( "Gimme data: " );
+ scanf( "%d", &nextNumber );
+
+ // zero doesn't count as an entered number
+ if (nextNumber == 0) break; 
+
+ if (nextNumber > current) {
+   current = nextNumber;
+   swapCounter++;
+ }
+} while (nextNumber != 0);
+
+printf( "There were %d swaps and the biggest number entered was %d", swapCounter, current );
+*/
+
+program problem21;
+
+#include ("stdlib.hhf")
+static
+iCurrent: int16;
+iNext: int16;
+iSwapCounter: int8:= 0;
+
+begin problem21;
+
+stdout.put("Gimme data: ");
+stdin.get(iNext);
+
+mov(iNext, BX); //used to hold current max
+
+DoWhileLpBody: // iCurrent != 0
+stdout.put("Gimme data: ");
+stdin.get(iNext);
+cmp(iNext, BX);
+jng DoWhileLpTermination;
+mov(iNext, BX);
+inc(iSwapCounter);
+DoWhileLpTermination:
+cmp(iNext, 0);
+je DoWhileLpDone; // then end loop
+jmp DoWhileLpBody; // continue looping
+DoWhileLpDone:
+
+mov(BX, iCurrent);
+
+stdout.put("There were ", iSwapCounter, " swaps and the biggest number entered was ", iCurrent, ".", nl);
+
+end problem21;

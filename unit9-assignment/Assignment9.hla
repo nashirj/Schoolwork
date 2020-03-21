@@ -1,0 +1,327 @@
+/*
+PROGRAM 4: SMC Fee Calculator
+Write an HLA Assembly language program that calculates student enrollment fees at Santa Monica College. (Since we only know how to deal with integer arithmetic, our program will be slightly inaccurate). As of Summer 2018, the enrollment fee is $46/unit for residents and $370/unit for all others. The student services fee is $48 for Winter or Summer and $51 for Fall or Spring. The purchase of a parking decal is optional which costs $85 in Fall/Spring or $45 in Winter/Summer.
+
+The enrollment fee will be entered based on a single 8-bit value entered by the user. The fee will have the format: prsseeee, where ss is a two-bit value corresponding to the semester (00 for Fall, 01 for Winter, 10 for Spring or 11 for Summer), eeee is a four-bit value corresponding to the number of enrolled units, r is a single bit corresponding to whether the student is a California resident or not and p is a single bit corresponding to whether a parking decal is desired. The format of this bit field is diagrammed below:
+
+Packed Bit Field of Fees
+Since just 8 bits are being entered, your program should expect to read 2 hexidecimal digits.
+7 - parking decal
+6 - CA resident
+54 - semester
+3210 - enrolled units
+
+Below are some sample program dialogues that demonstrate these ideas.
+(Hint: Do this in small steps, bit-by-bit. There's alot to it... )
+(Further Hint: The most important part of this assignment is to worked with the packed data field entered by the user to extract the sub-parts out of it. The overlapping design of the Intel registers helps you parse this kind of data field and you can shift the bits around to get the right part into BH or BL, for example... )
+(Further Hint: You can read hex numbers by reading directly into a register.)
+(Final Hint: Since we haven't learned how to do multiplication yet, although it's kinda painful, I was expecting that you would perform the multiplication by a looping set of addition instructions)
+
+
+Feed me(2 hex digits with the bits prsseeee): CC
+Fall Semester
+12 units
+CA Resident
+Parking
+Total Fees = $ 688
+
+Feed me(2 hex digits with the bits prsseeee): 4C
+Fall Semester
+12 units
+CA Resident
+No Parking
+Total Fees = $ 603
+
+Feed me(2 hex digits with the bits prsseeee): 8C
+Fall Semester
+12 units
+Non-Resident
+Parking
+Total Fees = $ 4576
+
+Feed me(2 hex digits with the bits prsseeee): 0C
+Fall Semester
+12 units
+Non-Resident
+No Parking
+Total Fees = $ 4491
+
+Feed me(2 hex digits with the bits prsseeee): D1
+Winter Semester
+1 unit
+CA Resident
+Parking
+Total Fees = $ 139
+
+Feed me(2 hex digits with the bits prsseeee): 91
+Winter Semester
+1 unit
+Non-Resident
+Parking
+Total Fees = $ 463
+*/
+
+
+program assignment9;
+#include ("stdlib.hhf");
+static
+total: int32:= 0;
+parking7: int8;
+resident6: int8;
+semester5: int8;
+semester4: int8;
+unit3: int32;
+unit2: int32;
+unit1: int32;
+unit0: int32;
+unit_total: int32:= 0;
+
+begin assignment9;
+
+
+///////////////
+//GETTING INPUT
+///////////////
+
+stdout.put("Feed me(2 hex digits with the bits prsseeee): ");
+stdin.get(BL);
+
+///////////////
+//PROCESS INPUT
+///////////////
+
+//BIT 0, i.e. UNIT0
+ror( 1, BL ); 
+jc Unit0Carry;
+mov( 0, unit0 );
+jmp Unit0NoCarry;
+Unit0Carry:
+mov( 1, unit0 );
+Unit0NoCarry:
+
+//BIT 1, i.e. UNIT1
+ror( 1, BL );
+jc Unit1Carry;
+mov( 0, unit1 );
+jmp Unit1NoCarry;
+Unit1Carry:
+mov( 1, unit1 );
+Unit1NoCarry:
+
+//BIT 2, i.e. UNIT2
+ror( 1, BL );
+jc Unit2Carry;
+mov( 0, unit2 );
+jmp Unit2NoCarry;
+Unit2Carry:
+mov( 1, unit2 );
+Unit2NoCarry:
+
+//BIT 3, i.e. UNIT3
+ror( 1, BL );
+jc Unit3Carry;
+mov( 0, unit3 );
+jmp Unit3NoCarry;
+Unit3Carry:
+mov( 1, unit3 );
+Unit3NoCarry:
+
+//BIT 4, i.e. SEMESTER4
+ror( 1, BL ); 
+jc Semester4Carry;
+mov( 0, semester4 );
+jmp Semester4NoCarry;
+Semester4Carry:
+mov( 1, semester4 );
+Semester4NoCarry:
+
+//BIT 5, i.e. SEMESTER5
+ror( 1, BL ); 
+jc Semester5Carry;
+mov( 0, semester5 );
+jmp Semester5NoCarry;
+Semester5Carry:
+mov( 1, semester5 );
+Semester5NoCarry:
+
+//BIT 6, i.e. RESIDENCY6
+ror( 1, BL ); 
+jc Residency6;
+mov( 0, resident6 );
+jmp Residency6NoCarry;
+Residency6:
+mov( 1, resident6 );
+Residency6NoCarry:
+
+//BIT 7, i.e. PARKING7
+ror( 1, BL ); 
+jc IfParking7;
+mov( 0, parking7 );
+jmp IfParking7NoCarry;
+IfParking7:
+mov( 1, parking7 );
+IfParking7NoCarry:
+
+
+
+
+//////////////////////
+//DETERMINE UNIT TOTAL
+//////////////////////
+
+mov(unit_total, ECX);
+
+//shl multiplies by 2
+add(unit0, ECX); //add unit0 * 2^0
+shl(1, unit1);
+add(unit1, ECX); //add unit0 * 2^1
+shl(1, unit2);
+shl(1, unit2);
+add(unit2, ECX); //add unit0 * 2^2
+shl(1, unit3);
+shl(1, unit3);
+shl(1, unit3);
+add(unit3, ECX); //add unit0 * 2^3
+
+mov(ECX, unit_total);
+
+
+//use DL for all boolean comparisons, pseudo-boolean representation of true (1)
+mov(1, DL);
+
+////////////////////////////////////////////////////////
+// DETERMINE SEMESTER & COST OF PARKING/STUDENT SERVICES
+////////////////////////////////////////////////////////
+
+//The student services fee is $48 for Winter or Summer and $51 for Fall or Spring.
+//The purchase of a parking decal (optional) costs $85 in Fall/Spring or $45 in Winter/Summer.
+
+////////////////////////////////////////////////////////////
+//00 for Fall, 01 for Winter, 10 for Spring or 11 for Summer
+////////////////////////////////////////////////////////////
+
+//check bit 4, if 1, winter/summer, else, fall/spring
+cmp(DL, semester4); //IF SEMESTER4 = 1
+jne FallSpring;
+
+WinterSummer:
+add(48, total); //summer/winter student services fee
+cmp(DL, semester5); //IF SEMESTER5 = 1
+jne Winter; //if 0 => winter, else 1 => summer
+
+Summer:
+stdout.put("Summer");
+jmp SummerWinterParking;
+
+Winter:
+stdout.put("Winter");
+jmp SummerWinterParking;
+
+FallSpring:
+add(51, total); //fall/spring student services fee
+cmp(DL, semester5); //IF SEMESTER5 = 1
+jne Fall; //if 0 => fall, else 1 => spring
+
+Spring:
+stdout.put("Spring");
+jmp FallSpringParking;
+
+Fall:
+stdout.put("Fall");
+jmp FallSpringParking;
+
+SummerWinterParking:
+add(45, total);
+jmp EndSemester;
+
+FallSpringParking:
+add(85, total);
+jmp EndSemester; //redundant
+
+EndSemester:
+stdout.put(" Semester", nl);
+
+
+///////////////////////////
+//DETERMINE NUMBER OF UNITS
+///////////////////////////
+
+
+mov(1, EBX);
+cmp(EBX, unit_total);
+je Only1Unit;
+
+stdout.put(unit_total, " units", nl);
+jmp EndUnits;
+
+Only1Unit:
+stdout.put("1 unit", nl);
+
+EndUnits:
+
+
+//////////////////////////////////////////
+//DETERMINE RESIDENCY STATUS/TUITION TOTAL
+//////////////////////////////////////////
+
+
+mov( 1, EAX ); //loop counter
+
+//IF RESIDENT
+cmp(DL, resident6);
+jne IfNotResident;
+
+IfResident:
+stdout.put("CA Resident", nl);
+
+ResidentTerminationTest: 
+cmp( EAX, unit_total );
+jg EndResidency;;
+ResidentBody:
+add(46, total); //$46/unit for residents
+ResidentIncrement:
+inc( EAX );
+jmp ResidentTerminationTest;
+
+IfNotResident:
+stdout.put("Non-Resident", nl);
+
+NonResidentTerminationTest: 
+cmp( EAX, unit_total );
+jg EndResidency;
+NonResidentBody:
+add(370, total); //$370/unit for non/residents
+NonResidentIncrement:
+inc( EAX );
+jmp NonResidentTerminationTest;
+
+EndResidency:
+
+
+//////////////////////////
+//PRINT PARKING/NO PARKING
+//////////////////////////
+
+
+//IF PARKING
+cmp(DL, parking7);
+jne IfNoParking;
+
+IfParking:
+stdout.put("Parking", nl);
+jmp EndParking;
+
+IfNoParking:
+stdout.put("No Parking", nl);
+EndParking:
+
+
+//////////////////////
+//PRINT TOTAL FEES
+//////////////////////
+
+stdout.put("Total Fees = $");
+stdout.put(total);
+stdout.newln();
+
+end assignment9;

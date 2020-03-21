@@ -1,0 +1,36 @@
+program Jumpy;
+#include( "stdlib.hhf" );
+static
+iLbl1Location : dword; 
+iLbl2Location : dword;
+iLbl3Location : dword;
+begin Jumpy;
+lea( EAX, lbl1 );
+mov( EAX, iLbl1Location );
+
+lea( EBX, lbl2 );
+mov( EBX, iLbl2Location );
+
+lea( ECX, lbl3 );
+mov( ECX, iLbl3Location );
+
+stdout.put( "Starting from the top...", nl );
+
+stdout.put( "about to: jmp( EAX ); (lbl1)", nl );
+
+jmp( EAX );
+
+lbl2:
+stdout.put( "---> here I am at lbl2", nl );
+stdout.put( "about to: jmp( iLbl3Location ); (lbl3)", nl );
+jmp( iLbl3Location );
+
+lbl1:
+stdout.put( "---> here I am at lbl1", nl );
+stdout.put( "about to: jmp( EBX ); (lbl2)", nl );
+jmp( EBX );
+
+lbl3:
+stdout.put( "---> here I am at lbl3", nl );
+
+end Jumpy; 

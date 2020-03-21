@@ -1,0 +1,152 @@
+/*
+Please complete the following tasks to signify your successful completion of Unit 13. It should be the case that the only instructions you need to complete the programs assigned here are the ones I've described so far. Click here to see an HLA Programmer's Reference Guide for the instructions we've learned so far except for the FPU instructions. 
+
+Following the Electronic Submission Guidelines, please send me a copy of the .hla file you created for this assignment. 
+
+PROGRAM 7: Char Converter!
+
+Since char values in HLA are just numeric equivalencies based on their ASCII code table value, you can manipulate character like you do any other numerical value.
+
+For this program, I would like you to create a function which returns a character value based on a character parameter as shown below:
+
+Letter  Return Value
+A-Z a-z
+a-z A-Z
+0-9 !
+all other letters   _
+So in other words, UPPERCASE letters should become lowercase, lowercase letters should become UPPERCASE, number characters should be come an exclamation mark and all other characters should turn into an underscore.  The converted letter should be stored in AL.
+Write an HLA Assembly language program that implements the following function:
+
+
+Your function should return in AL the converted character value, as shown in the chart above. 
+
+(Hint: Since the run-stack doesn't allow for a byte-sized argument to be pushed and popped, you will need to envelope the argument in a larger eight bit argument.  The converted letter should be stored into AL)
+
+Feed Me: I
+converted that's i
+
+Feed Me: g
+converted that's G
+
+Feed Me: 1
+converted that's !
+
+
+Feed Me: #
+converted that's _
+*/
+
+program Convert;
+#include ("stdlib.hhf");
+static
+userIn : byte;
+cConverted : byte;
+
+procedure converter( myCharacter : byte ); @nodisplay; @noframe;
+static
+iReturnAddress : dword;
+cTemp : byte;
+
+begin converter;
+// entry sequence
+// acquire parameters on the stack
+pop(iReturnAddress);
+pop(AX);
+mov(AL, myCharacter);
+push(iReturnAddress);
+// preserve registers ---
+push(BX);
+
+greaterThanOrEqualTo0:
+mov($30, BL);
+//determine case
+cmp( myCharacter, BL);
+jge greaterThanOrEqualTo9;
+jmp allOther;
+
+greaterThanOrEqualTo9:
+mov($39, BL);
+//determine case
+cmp( myCharacter, BL);
+jle isNum;
+jmp greaterThanOrEqualToA;
+
+greaterThanOrEqualToA:
+mov($41, BL);
+//determine case
+cmp( myCharacter, BL);
+jl allOther;
+jmp greaterThanOrEqualToZ;
+
+greaterThanOrEqualToZ:
+mov($5A, BL);
+//determine case
+cmp( myCharacter, BL);
+jle isUpper;
+jmp greaterThanOrEqualToLowerA;
+
+greaterThanOrEqualToLowerA:
+mov($61, BL);
+//determine case
+cmp( myCharacter, BL);
+jl allOther;
+jmp greaterThanOrEqualToLowerZ;
+
+greaterThanOrEqualToLowerZ:
+mov($7A, BL);
+//determine case
+cmp( myCharacter, BL);
+jle isLower;
+jmp allOther;
+
+
+
+isNum:
+mov($21, AL);
+jmp ExitSequence;
+
+isUpper:
+mov(myCharacter, AL);
+or(%0010_0000, AL);
+jmp ExitSequence;
+
+isLower:
+mov(myCharacter, AL);
+and(%1101_1111, AL);
+jmp ExitSequence;
+
+allOther:
+mov($5F, AL);
+jmp ExitSequence;
+
+
+
+ExitSequence:
+// pop all preserved registers ---
+pop(BX);
+pop(iReturnAddress);
+push(AX);
+push(iReturnAddress);
+ret();
+end converter;
+
+
+
+begin Convert;
+stdout.put("Feed Me: ");
+stdin.flushInput();
+stdin.getc(); //stores result in AL
+
+push(AX);
+
+call converter;
+
+pop(AX);
+
+mov(AL, cConverted);
+
+stdout.put("converted that's ")
+stdout.putc(cConverted);
+stdout.newln();
+
+end Convert;
